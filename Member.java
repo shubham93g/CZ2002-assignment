@@ -7,7 +7,6 @@ public class Member
    private String emailID;
    private int phoneNumber;
    private String address;
-   private boolean exists;
    
    	public Member(){
 	   	memberID=0;
@@ -15,16 +14,14 @@ public class Member
 	   	emailID="b";
 	   	phoneNumber=0;
 	   	address="c";
-	   	exists=false;
    	}
 
-	public Member(int member_memberID, String member_name, String member_emailID, int member_phoneNumber, String member_address, boolean a){
+	public Member(int member_memberID, String member_name, String member_emailID, int member_phoneNumber, String member_address){
 		memberID = member_memberID;
 		name = member_name;
 		emailID = member_emailID;
 		phoneNumber = member_phoneNumber;
 		address = member_address;
-		exists = a;
 	}
 	
 	public int getMemberID(){
@@ -72,11 +69,6 @@ public class Member
 		emailID = member_emailID;
 		phoneNumber = member_phoneNumber;
 		address = member_address;
-		exists = true;
-	}
-	
-	public boolean isMember(){
-		return exists;
 	}
 
 }

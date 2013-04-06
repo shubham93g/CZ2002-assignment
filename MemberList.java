@@ -15,7 +15,7 @@ public class MemberList
    
 	public boolean checkMember(int member_memberID){ //to check membership by memberID; //to have a boolean variable that return true if membership exists;
 		for(int i=0;i<member_list.size();i++)   
-			if (member_list.get(i).isMember() && member_list.get(i).getMemberID()==member_memberID)
+			if (member_list.get(i).getMemberID()==member_memberID)
 		    	return true;
 		return false;
 	       }
@@ -64,11 +64,8 @@ public class MemberList
 			 
 	public void printAllMembers(){
 		System.out.println ("The following is the list of members and their member IDs: ");
-	    for (int i=0; i<100; i++){
-	    	if (member_list.get(i).isMember()){
+	    for (int i=0; i<member_list.size(); i++)
 	    		System.out.println("Name: "+member_list.get(i).getName()+" Member ID: "+member_list.get(i).getMemberID());
-	    		}
-	    	}
 	    }
 }
 //print all members by member ID and staffID;
