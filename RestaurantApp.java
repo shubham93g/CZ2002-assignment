@@ -37,7 +37,7 @@ case 4:
 break;
 
 case 5:{
-
+int choice1=0;
 while (choice1 != 4) do{
 System.out.println("What do you want to do:");
 System.out.println("1. Create menu item");
@@ -45,9 +45,9 @@ System.out.println("2. Update menu item");
 System.out.println("3. Remove menu item");
 System.out.println("4. Back");
 
-choice1 = sc.getnextInt();
+choice1 = sc.nextInt();
 
-switch(choice1)
+switch(choice1){
 
 case1:{
 System.out.println("--Create menu item--");
@@ -65,7 +65,7 @@ Menu.createMenuItem(//invariables)
 
 }
 
-case2:
+case2:{
 System.out.println("Which item do you wish to update?");
 System.out.println("Please enter the item ID");
 //scanner get itemID
@@ -108,9 +108,9 @@ break;
 
 
 
-
+}
 //remove menuitem
-case3:
+case3:{
 System.out.println("--Remove menu item--");
 System.out.println("Please enter the itemID of the item you wish to remove: ");
 choice3 =get int
@@ -118,7 +118,7 @@ choice3 =get int
 removeMenuitem(choice3);
 System.out.println("Menu item removed succesfully");
 
-
+}
 default:
 break;
 }
