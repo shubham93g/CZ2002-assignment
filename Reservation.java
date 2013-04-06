@@ -9,8 +9,8 @@ public class Reservation {
 	int phoneNumber;
 	TableList table;
 	
-	public Reservation(String name, int phoneNumber, int noOfPeople){
-		dateOfReservation = new Date();
+	public Reservation(String name, int phoneNumber, int noOfPeople, Date date){
+		dateOfReservation = date;
 		this.noOfPeople = noOfPeople;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
