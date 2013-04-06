@@ -1,3 +1,6 @@
+import java.util.Scanner;
+
+
 public main RestaurantApp{
 
 while (choice!=10) do{
@@ -12,8 +15,8 @@ System.out.println("7. Check table availability");
 System.out.println("8. Print order invoice");
 System.out.println("9. Print sales revenue report");
 System.out.println("10. Quit");
-
-sc=scanner.getnextInt();
+Scanner sc = new Scanner(System.in);
+int choice = sc.nextInt();
 
 switch(choice)
 
