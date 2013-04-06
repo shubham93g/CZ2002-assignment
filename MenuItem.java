@@ -21,7 +21,7 @@ return category;
 }
 
 public String getName(){
-return getName();
+return name;
 }
 
 public double getPrice(){
