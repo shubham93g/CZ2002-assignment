@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class Order {
 	
-	MenuItem [] menuItems;
-	MenuSet [] menuSet;
+	int [] menuItems;
+	int [] menuSet;
 	int staffID;
 	int tableID;
 	//long time;
@@ -14,14 +14,15 @@ public class Order {
 	
 	//new additions from the original
 	Menu menu; //for list of menu items
+	PromoMenu promoMenu;
 	int itemNo;
 	int setNo;
 	int pax;
 	boolean active;
 	
 	public Order(){
-		menuItems = new MenuItem[20];
-		menuSet = new MenuSet[20];
+		menuItems = new int[20];
+		menuSet = new int[20];
 		itemNo = 0;
 		setNo = 0;
 		active = true;
@@ -44,14 +45,14 @@ public class Order {
 			case 1: menu.printMenu();
 					System.out.print("Input Menu Item to add : ");
 					menuSelection = sc.nextInt();
-					menuItems[itemNo] = menu.getItem(menuSelection);
+					menuItems[itemNo] = menuSelection;
 					itemNo++;
 					System.out.println("Item add successful");
 					break;
 			case 2: menu.printMenu();
 					System.out.print("Input Menu Set to add : ");
 					menuSelection = sc.nextInt();
-					menuSet[setNo] = menu.getSet(menuSelection);
+					menuSet[setNo] = menuSelection;
 					setNo++;
 					System.out.println("Set add successful");
 					break;
@@ -132,9 +133,9 @@ public class Order {
 		//calculate total sum of order
 		double price = 0;
 		for(int i=0;i<itemNo;i++)
-			price += menuItems[i].getPrice();
+			price += menu.getMenuItem(menuItems[i]).getPrice();
 		for(int j=0;j<setNo;j++)
-			price += menuSet[j].getPrice();
+			price += promoMenu.getMenuSet(menuSet[j]).getPrice();
 		return price;
 	}
 	
@@ -144,12 +145,12 @@ public class Order {
 		System.out.println("Menu Items");
 		for(int i=0;i<itemNo;i++){
 			System.out.println(i+1 +". ");
-			menuItems[i].print();
+			menu.getMenuItem(menuItems[i]).printMenuItem();
 		}
 		System.out.println("Menu Sets");
-		for(int j=0;i<setNo;j++){
+		for(int j=0;j<setNo;j++){
 			System.out.println(j+1 +". ");
-			menuSet[j].print();
+			promoMenu.getMenuSet(menuSet[j]).printMenuSet();
 		}
 	}
 	
@@ -180,13 +181,5 @@ public class Order {
 	
 	public boolean getStatus(){
 		return active;
-	}
-	
-	public MenuItem getItem(int itemNo){
-		return menuItems[itemNo];
-	}
-	
-	public MenuSet getSet(int setNo){
-		return menuSet[setNo];
 	}
 }

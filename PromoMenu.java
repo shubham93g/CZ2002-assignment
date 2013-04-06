@@ -16,6 +16,12 @@ public void printPromoMenu(){
  	 System.out.println("\n");
   }
   }
+public MenuSet getMenuSet(int setID){
+	for(int i=0;i<PromoMenu.length;i++)
+		if(PromoMenu[i].getSetID()==setID)
+			return PromoMenu[i];
+	return null;
+}
   }
 
 

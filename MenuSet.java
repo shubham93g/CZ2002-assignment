@@ -1,6 +1,7 @@
 public class MenuSet{
 private MenuItem MenuSet[] = new MenuItem[3];
 private double setPrice;
+private int setID;
  
 
 //constructor
@@ -9,6 +10,7 @@ private double setPrice;
    MenuSet[i]=new MenuItem(0); 
   }
    setPrice=0.0;
+   
   
   
   }
@@ -16,11 +18,19 @@ private double setPrice;
   
   
   public double getPrice(){
-  return setPrice;
+	  return setPrice;
   }  
   
   public void setPrice(double price){
-  setPrice=price;
+	  setPrice=price;
+  }
+  
+  public void setSetID(int setID){
+	  this.setID = setID;
+  }
+  
+  public int getSetID(){
+	  return setID;
   }
   
   //Create new MenuSet, starting by setting 3 new dishes, starter main and dessert

@@ -81,5 +81,12 @@ public void removeMenuItem(int itemID){
 	
 }
 
+public MenuItem getMenuItem(int itemID){
+	for(int i=0;i<Menu.length;i++)
+		if(Menu[i].getItemID()==itemID)
+			return Menu[i];
+	return null;
+}
+
 
 }
