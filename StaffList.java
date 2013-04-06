@@ -3,13 +3,13 @@
 
 public class StaffList
 {
-   private staff[] staff_list;
+   private Staff[] staff_list;
    
    public StaffList()
-   {staff_list=new staff[100]; //How to determine the length of this array?
+   {staff_list=new Staff[100]; //How to determine the length of this array?
        for (int i=0; i< staff_list.length; i++)
 		 { 
-		     staff_list[i]= new staff("a","m","b",i+1,0,false);
+		     staff_list[i]= new Staff("a","m","b",i+1,0,false);
 		 }
 }
 	public void checkStaff(int staff_employeeID) //to check membership by memberID
@@ -37,8 +37,8 @@ public class StaffList
 	       }}}
 	  
 	 public void sortStaff(){
-		staff temporaryStaff; //used for array operations
-		staff [] staffCopy = new staff[100];
+		Staff temporaryStaff; //used for array operations
+		Staff [] staffCopy = new Staff[100];
 		System.arraycopy(staff_list, 0, staffCopy, 0, staff_list.length);
 		for(int j=0;j<staff_list.length;j++)	
 			for(int i=staffCopy.length-1;i>j;i--)

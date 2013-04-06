@@ -1,12 +1,12 @@
 
 
-public class staff
+public class Staff
 {
 String name,gender,jobTitle;
 int employeeID,age;
 boolean exists;
 
-public staff()
+public Staff()
 {name="a";
 gender="m";
 jobTitle="b";
@@ -15,7 +15,7 @@ jobTitle="b";
  exists=false;
 }
 
-public staff(String staff_name, String staff_gender, String staff_jobTitle, int staff_employeeID, int staff_age, boolean a)
+public Staff(String staff_name, String staff_gender, String staff_jobTitle, int staff_employeeID, int staff_age, boolean a)
 {name=staff_name;
 gender=staff_gender;
 jobTitle=staff_jobTitle;
