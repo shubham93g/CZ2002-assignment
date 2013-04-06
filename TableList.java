@@ -2,8 +2,10 @@
 public class TableList {
 	
 	Table[] table;
+	int noOfTables; 
 	
 	public TableList(){
+		noOfTables = 10;
 		table = new Table[10];
 		table[0] = new Table(0,2);
 		table[1] = new Table(1,2);
@@ -32,5 +34,12 @@ public class TableList {
 				occupied++;
 		return occupied;
 	}
+	
+	public Table getTable(int tableID){
+		return table[tableID];
+	}
 
+	public int getNoOfTables(){
+		return noOfTables;
+	}
 }
