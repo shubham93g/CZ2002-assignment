@@ -72,25 +72,25 @@ itemID=itemID_set;
 	}
 
 public void printMenuItem(){
-String pcategory;
-if (category=='1'){
-pcategory="Starter";
-}
-else if (category=='2'){
-pcategory="Main";
-}
-else if (category=='3'){
-pcategory="Dessert";
-}
-else{
-pcategory="Not specified";
-}
-System.out.println("ItemID: "+itemID);
-System.out.println("Name: "+name);
-System.out.println("Category: "+pcategory);
-System.out.println("Description: "+description);
-System.out.println("Price: "+price);
-}
+	String pcategory;
+	if (category=='1'){
+		pcategory="Starter";
+	}
+	else if (category=='2'){
+		pcategory="Main";
+	}
+	else if (category=='3'){
+		pcategory="Dessert";
+	}
+	else{
+		pcategory="Not specified";
+	}
+	System.out.println("ItemID: "+itemID);
+	System.out.println("Name: "+name);
+	System.out.println("Category: "+pcategory);
+	System.out.println("Description: "+description);
+	System.out.println("Price: "+price);
+	}
 
 
 

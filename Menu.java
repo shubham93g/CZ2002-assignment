@@ -54,6 +54,7 @@ int k = 0;
 }
 
 
+
 //Update menuitem
 	public void updateMenuItemPrice(int itemID, double price){
 		Menu[itemID].setPrice(price);

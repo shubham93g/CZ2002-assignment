@@ -34,19 +34,19 @@ private int setID;
   }
   
   //Create new MenuSet, starting by setting 3 new dishes, starter main and dessert
-  public void setDishByInfo(int category, String name, String description, double price){
-  MenuSet[category].setCategory(category);
-  MenuSet[category].setName(name);
-  MenuSet[category].setDescription(description);
-  MenuSet[category].setPrice(price); 
+  public void setDishByInfo(int category, String name, String description, double price,int getj){
+  MenuSet[getj].setCategory(category);
+  MenuSet[getj].setName(name);
+  MenuSet[getj].setDescription(description);
+  MenuSet[getj].setPrice(price); 
   }
   
   //assigns values form itemId to the category of choice
-  public void setDishByItemID(int setitemID,int setcategory){
-  MenuSet[setcategory].setName(MenuSet[setitemID].getName());
-  MenuSet[setcategory].setPrice(MenuSet[setitemID].getPrice());
-  MenuSet[setcategory].setCategory(MenuSet[setitemID].getCategory());
-  MenuSet[setcategory].setDescription(MenuSet[setitemID].getDescription());
+  public void setDishByItemID(int setitemID,int geti){
+  MenuSet[geti].setName(MenuSet[setitemID].getName());
+  MenuSet[geti].setPrice(MenuSet[setitemID].getPrice());
+  MenuSet[geti].setCategory(MenuSet[setitemID].getCategory());
+  MenuSet[geti].setDescription(MenuSet[setitemID].getDescription());
   }
   
   //resets the values for the menuSet
