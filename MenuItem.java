@@ -1,97 +1,44 @@
-public class MenuItem {
+public class MenuItem extends Item{
 
-private int category;
-private String name;
-private double price;
-private String description;
-private int itemID;
-
-//constructor
-public MenuItem(int itemID_construct){
-itemID=itemID_construct;
-category = 0;
-name = "";
-price = 0.0;
-description = "";
-
-}
-
-public int getCategory(){
-return category;
-}
-
-public String getName(){
-return name;
-}
-
-public double getPrice(){
-return price;
-}
-
-public  String getDescription(){
-return description;
-}
-
-public int getItemID(){
-return itemID;
-}
-
-public void setCategory(int category_set){
-category=category_set;
-}
-
-public void setName(String name_set){
-name=name_set;
-}
-
-public void setPrice(double price_set){
-price=price_set;
-}
-
-public void setDescription(String description_set){
-description=description_set;
-}
-
-public void setItemID(int itemID_set){
-itemID=itemID_set;
-}
-
-
-	public void clearName(){
-	name = "";
+	int category;
+	
+	//constructor
+	public MenuItem(int itemID, String name, int category, String description, double price){
+	
+	super(itemID, name,description,price);
+	this.category = category;
+	
 	}
 	
-	public void clearPrice(){
-	price = 0.0;
+	public int getCategory(){
+	return category;
 	}
-	public void clearCategory(){
-	category=0;
+	
+	public void setCategory(int category_set){
+	category=category_set;
 	}
-	public void clearDescription(){
-	description="";
-	}
-
-public void printMenuItem(){
-	String pcategory;
-	if (category=='1'){
-		pcategory="Starter";
-	}
-	else if (category=='2'){
-		pcategory="Main";
-	}
-	else if (category=='3'){
-		pcategory="Dessert";
-	}
-	else{
-		pcategory="Not specified";
-	}
-	System.out.println("ItemID: "+itemID);
-	System.out.println("Name: "+name);
-	System.out.println("Category: "+pcategory);
-	System.out.println("Description: "+description);
-	System.out.println("Price: "+price);
-	}
-
+	
+	public void printMenuItem(){
+		String pcategory;
+		if (category=='1'){
+			pcategory="Starter";
+		}
+		else if (category=='2'){
+			pcategory="Main";
+		}
+		else if (category=='3'){
+			pcategory="Dessert";
+		}
+		else{
+			pcategory="Not specified";
+		}
+		System.out.println("ItemID: "+ getID());
+		System.out.println("Name: "+getName());
+		System.out.println("Category: "+pcategory);
+		System.out.println("Description: "+getDescription());
+		System.out.println("Price: "+ getPrice());
+		}
+	
 
 
 }

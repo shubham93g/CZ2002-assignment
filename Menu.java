@@ -1,19 +1,21 @@
+import java.util.ArrayList;
+
 public class Menu{
-private MenuItem Menu[] = new MenuItem[40];
 
+	ArrayList <MenuItem> menu;
 
- public Menu(){
-  for (int i=0; i<Menu.length; i++){
-   Menu[i]=new MenuItem(i); 
-  }
-  }
+ 	public Menu(){
+ 		menu = new ArrayList <MenuItem>();
+ 	}
   
   
   
   public void printMenu(){
-  //first sort it according to category
-  int n = Menu.length;
-  MenuItem temp;
+	  //first sort it according to category
+	  MenuItem[] Menu = new MenuItem[menu.size()];
+	  System.arraycopy(menu.toArray(), 0, Menu, 0, menu.size());
+	  int n = Menu.length;
+	  MenuItem temp;
   
                 for(int i=0; i < n; i++){
                  for(int j=1; j < (n-i); j++){
@@ -26,47 +28,81 @@ private MenuItem Menu[] = new MenuItem[40];
                 	}
                 }
   
-  //then print it
+      //then print it
   
-  for (int i=0; i<n; i++){
-  if (Menu[i].getCategory() != 0)
-  System.out.println(Menu[i].getName()+"\n"+Menu[i].getDescription()+"\n"+Menu[i].getPrice());
+	  for (int i=0; i<n; i++){
+	  if (Menu[i].getCategory() != 0)
+	  System.out.println(Menu[i].getName()+"\n"+Menu[i].getDescription()+"\n"+Menu[i].getPrice());
+			}
+	  
 		}
   
-	}
+  //function to check if an item with given ID exists  
+  public boolean checkMenuItem(int id){
+	  for(int i=0;i<menu.size();i++)
+		  if(menu.get(i).getID() == id)
+			  return true;
+	  return false;
+  }
+  
+  //function to auto generate menuID
+  public int generateID(){
+	  for(int i=0;i<menu.size();i++) //check if there are any items with missing IDs (as compared to index)
+		  if(!checkMenuItem(i))	//if yes, return this missing ID
+			  return i;
+	  
+	  int lastID = menu.get(menu.size()-1).getID(); //otherwise, get the last used ID
+	  while(checkMenuItem(lastID)) //increment it till you get a new, unused ID
+		  lastID++;
+	  return lastID; //return this newID
+			  
+  }
   
  
 //check first available menu item
-//insert values given for name, categorty, price and description
+//insert values given for name, category, price and description
 public void createMenuItem(String cname, String cdescription, double cprice, int ccategory){
-
-int k = 0;
-	while (Menu[k].getPrice() != 0.0 && Menu[k].getCategory() != 0){
-		k++;
-	}
-
-	Menu[k].setPrice(cprice);
-	Menu[k].setName(cname);
-	Menu[k].setDescription(cdescription);
-	Menu[k].setCategory(ccategory);
-
-
+	MenuItem newMenuItem = new MenuItem(generateID(), cname, ccategory, cdescription, cprice);
+	menu.add(newMenuItem);
 }
 
-
+//return index of menuItem with given ID if it exists
+public int getMenuItemIndex(int id){
+	for(int i=0;i<menu.size();i++)
+		if(menu.get(i).getID() == id)
+			return i;
+	return -1; //if no such item with given ID exists, return -1
+}
 
 //Update menuitem
 	public void updateMenuItemPrice(int itemID, double price){
-		Menu[itemID].setPrice(price);
+		int index = getMenuItemIndex(itemID);
+		if(index!=-1)
+			menu.get(index).setPrice(price);
+		else
+			System.out.println("Update failed");
+			
 	}
 	public void updateMenuItemName(int itemID, String name){
-		Menu[itemID].setName(name);
+		int index = getMenuItemIndex(itemID);
+		if(index!=-1)
+			menu.get(index).setName(name);
+		else
+			System.out.println("Update failed");
 	}
 	public void updateMenuItemDescription(int itemID, String description){
-		Menu[itemID].setDescription(description);
+		int index = getMenuItemIndex(itemID);
+		if(index!=-1)
+			menu.get(index).setDescription(description);
+		else
+			System.out.println("Update failed");
 	}
 	public void updateMenuItemCategory(int itemID, int category){
-		Menu[itemID].setCategory(category);
+		int index = getMenuItemIndex(itemID);
+		if(index!=-1)
+			menu.get(index).setCategory(category);
+		else
+			System.out.println("Update failed");
 	}
 
 
@@ -74,20 +110,11 @@ int k = 0;
 //remove menuitem, will not delete the item but make it not appear in the menu print
 
 public void removeMenuItem(int itemID){
-	Menu[itemID].clearName();
-	Menu[itemID].clearPrice();
-	Menu[itemID].clearCategory();
-	Menu[itemID].clearDescription();
+	int index = getMenuItemIndex(itemID);
+	if(index!=-1)
+		menu.remove(index);
+	else
+		System.out.println("Remove failed");
 	
-	
-}
-
-public MenuItem getMenuItem(int itemID){
-	for(int i=0;i<Menu.length;i++)
-		if(Menu[i].getItemID()==itemID)
-			return Menu[i];
-	return null;
-}
-
-
+	}
 }

@@ -15,24 +15,39 @@ public class StaffList
 	   //---------------need to replace above code with reading of members from a file----------------------
 }
 	
-   public boolean checkStaff(int staff_employeeID){ //to check membership by memberID
+   public boolean checkStaff(int staff_employeeID){ //to check staff by staffID
 		for (int i=0; i<staff_list.size(); i++)
 			if (staff_employeeID==staff_list.get(i).getID()){
 				return true;
 			}
 		return false;
 	    }
+   
+   public int generateID(){
+		  for(int i=0;i<staff_list.size();i++) //check if there are any staff with missing IDs (as compared to index)
+			  if(!checkStaff(i))	//if yes, return this missing ID
+				  return i;
+		  
+		  int lastID = staff_list.get(staff_list.size()-1).getID(); //otherwise, get the last used ID
+		  while(checkStaff(lastID)) //increment it till you get a new, unused ID
+			  lastID++;
+		  return lastID; //return this newID
+				  
+	  }
+   
+   public int getStaffIndex(int id){
+		for(int i=0;i<staff_list.size();i++)
+			if(staff_list.get(i).getID() == id)
+				return i;
+		return -1; //if no such staff with given ID exists, return -1
+	}
 	
 	
-	 public void createStaff(int staffID, String staffName, char staffGender, String staffJobTitle, String staffEmailID, String staffAddress, int staffPhoneNumber){
-	 int i=staffID-1;
-	 Staff staff = new Staff(staffID, staffName, staffGender, staffJobTitle, staffEmailID, staffAddress, staffPhoneNumber);
-	     if (!checkStaff(staffID)){
-	    	 staff_list.add(staff);
-	         System.out.println("The StaffID "+staff_list.get(i).getID()+ " is assigned to "+staff_list.get(i).getName());
-	         }
-	     else
-	    	 System.out.println("This StaffID is already taken!");
+	 public void createStaff(String staffName, char staffGender, String staffJobTitle, String staffEmailID, String staffAddress, int staffPhoneNumber){
+		 int staffID = generateID();
+		 Staff staff = new Staff(staffID, staffName, staffGender, staffJobTitle, staffEmailID, staffAddress, staffPhoneNumber);
+		    	 staff_list.add(staff);
+		         System.out.println("The StaffID "+staff.getID()+ " is assigned to "+staff.getName());
 	     }
 	       
 	 public void printStaff(int staff_employeeID){ //to print details of a member given membership ID

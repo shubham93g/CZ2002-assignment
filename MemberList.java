@@ -13,12 +13,27 @@ public class MemberList
 	  
    }
    
-	public boolean checkMember(int member_memberID){ //to check membership by memberID; //to have a boolean variable that return true if membership exists;
+	public boolean checkMember(int member_memberID){ 
+		//to check membership by memberID; 
+		//to have a boolean variable that return true if membership exists;
 		for(int i=0;i<member_list.size();i++)   
 			if (member_list.get(i).getID()==member_memberID)
 		    	return true;
 		return false;
 	       }
+	
+	//auto generate member ID
+	   public int generateID(){
+			  for(int i=0;i<member_list.size();i++) //check if there are any member with missing IDs (as compared to index)
+				  if(!checkMember(i))	//if yes, return this missing ID
+					  return i;
+			  
+			  int lastID = member_list.get(member_list.size()-1).getID(); //otherwise, get the last used ID
+			  while(checkMember(lastID)) //increment it till you get a new, unused ID
+				  lastID++;
+			  return lastID; //return this newID
+					  
+		  }
 	       
 	 public void printMember(int member_memberID){ //to print details of a member given membership ID
 		 {
@@ -30,15 +45,19 @@ public class MemberList
 			 }
 		 }
 	       
-	 public void createMember(int memberID, String member_name, String member_emailID, int member_phoneNumber, String member_address){
-		 int i=memberID-1;
-		 Member member = new Member(i,member_name, member_emailID, member_phoneNumber, member_address);
-		 if(!checkMember(memberID)){
+	 public int getMemberIndex(int id){
+			for(int i=0;i<member_list.size();i++)
+				if(member_list.get(i).getID() == id)
+					return i;
+			return -1; //if no such item with given ID exists, return -1
+		}
+	 
+	 public void createMember(String member_name, String member_emailID, int member_phoneNumber, String member_address){
+		 int memberID = generateID();
+		 Member member = new Member(memberID,member_name, member_emailID, member_phoneNumber, member_address);
 	    	 member_list.add(member);
-	         System.out.println("The MemberID "+member_list.get(i).getID()+ " is assigned to "+member_list.get(i).getName());
-	         }
-	     else 
-	    	 System.out.println("This memberID is already taken!");
+	         System.out.println("The MemberID "+member.getID()+ " is assigned to "+member.getName());
+
 	     }
 	  
 	 public void sortMembers(){
