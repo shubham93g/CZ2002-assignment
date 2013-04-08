@@ -1,3 +1,4 @@
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -21,7 +22,7 @@ public void setPeriod(int year_start, int year_end, int month_start, int month_e
 
             	myCal.set(Calendar.YEAR, year_start);
             	myCal.set(Calendar.MONTH, month1);
-            	myCal.set(Calendar.DAY_OF_MONTH, day);
+            	myCal.set(Calendar.DAY_OF_MONTH, day_start);
             	Date theDate = myCal.getTime();
 		startDate= theDate;
 

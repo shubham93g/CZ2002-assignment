@@ -1,10 +1,14 @@
 
 public class Item {
 	
-	int id;
-	String name;
-	String description;
-	double price;
+	private int id;
+	private String name;
+	private String description;
+	private double price;
+	
+	public Item(){
+		
+	}
 	
 	public Item(int id, String name, String description, double price){
 		this.id = id;

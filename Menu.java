@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Menu{
 
-	ArrayList <MenuItem> menu;
+	private ArrayList <MenuItem> menu;
 
  	public Menu(){
  		menu = new ArrayList <MenuItem>();
@@ -37,6 +37,15 @@ public class Menu{
 	  
 		}
   
+  public void printMenuItemByID(int id){
+	  for(int i=0;i<menu.size();i++)
+		  if(menu.get(i).getID() == id){
+			  menu.get(i).printMenuItem();
+			  break;
+		  }
+			  
+  }
+  
   //function to check if an item with given ID exists  
   public boolean checkMenuItem(int id){
 	  for(int i=0;i<menu.size();i++)
@@ -62,21 +71,30 @@ public class Menu{
 //check first available menu item
 //insert values given for name, category, price and description
 public void createMenuItem(String cname, String cdescription, double cprice, int ccategory){
-	MenuItem newMenuItem = new MenuItem(generateID(), cname, ccategory, cdescription, cprice);
+	int id = generateID();
+	MenuItem newMenuItem = new MenuItem(id, cname, ccategory, cdescription, cprice);
 	menu.add(newMenuItem);
 }
 
 //return index of menuItem with given ID if it exists
-public int getMenuItemIndex(int id){
+public int getMenuItemIndexByID(int id){
 	for(int i=0;i<menu.size();i++)
 		if(menu.get(i).getID() == id)
 			return i;
 	return -1; //if no such item with given ID exists, return -1
 }
 
+public MenuItem getMenuItemById(int id){
+	int index = getMenuItemIndexByID(id);
+	if(index!=-1)
+		return menu.get(index);
+	else
+		return null;
+}
+
 //Update menuitem
 	public void updateMenuItemPrice(int itemID, double price){
-		int index = getMenuItemIndex(itemID);
+		int index = getMenuItemIndexByID(itemID);
 		if(index!=-1)
 			menu.get(index).setPrice(price);
 		else
@@ -84,21 +102,21 @@ public int getMenuItemIndex(int id){
 			
 	}
 	public void updateMenuItemName(int itemID, String name){
-		int index = getMenuItemIndex(itemID);
+		int index = getMenuItemIndexByID(itemID);
 		if(index!=-1)
 			menu.get(index).setName(name);
 		else
 			System.out.println("Update failed");
 	}
 	public void updateMenuItemDescription(int itemID, String description){
-		int index = getMenuItemIndex(itemID);
+		int index = getMenuItemIndexByID(itemID);
 		if(index!=-1)
 			menu.get(index).setDescription(description);
 		else
 			System.out.println("Update failed");
 	}
 	public void updateMenuItemCategory(int itemID, int category){
-		int index = getMenuItemIndex(itemID);
+		int index = getMenuItemIndexByID(itemID);
 		if(index!=-1)
 			menu.get(index).setCategory(category);
 		else
@@ -110,7 +128,7 @@ public int getMenuItemIndex(int id){
 //remove menuitem, will not delete the item but make it not appear in the menu print
 
 public void removeMenuItem(int itemID){
-	int index = getMenuItemIndex(itemID);
+	int index = getMenuItemIndexByID(itemID);
 	if(index!=-1)
 		menu.remove(index);
 	else

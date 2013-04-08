@@ -1,8 +1,8 @@
 
 public class Table {
-	int tableID;
-	int capacity;
-	boolean isOccupied;
+	private int tableID;
+	private int capacity;
+	private boolean isOccupied;
 	
 	public Table(int tableID, int capacity){
 		isOccupied = false;

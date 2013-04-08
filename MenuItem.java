@@ -1,6 +1,6 @@
 public class MenuItem extends Item{
 
-	int category;
+	private int category;
 	
 	//constructor
 	public MenuItem(int itemID, String name, int category, String description, double price){
@@ -29,6 +29,8 @@ public class MenuItem extends Item{
 		else if (category=='3'){
 			pcategory="Dessert";
 		}
+		else if (category =='4')
+			pcategory="Drink";
 		else{
 			pcategory="Not specified";
 		}

@@ -1,8 +1,8 @@
 
 public class TableList {
 	
-	Table[] table;
-	int noOfTables; 
+	private Table[] table;
+	private int noOfTables; 
 	
 	public TableList(){
 		noOfTables = 10;
@@ -10,13 +10,13 @@ public class TableList {
 		table[0] = new Table(0,2);
 		table[1] = new Table(1,2);
 		table[2] = new Table(2,2);
-		table[3] = new Table(3,2);
+		table[3] = new Table(3,4);
 		table[4] = new Table(4,4);
 		table[5] = new Table(5,4);
-		table[6] = new Table(6,4);
-		table[7] = new Table(7,4);
+		table[6] = new Table(6,6);
+		table[7] = new Table(7,6);
 		table[8] = new Table(8,6);
-		table[9] = new Table(9,6);
+		table[9] = new Table(9,10);
 	}
 	
 	public int showEmpty(){
@@ -41,5 +41,29 @@ public class TableList {
 
 	public int getNoOfTables(){
 		return noOfTables;
+	}
+	
+	public void occupyTable(int index){
+		table[index].occupy();
+	}
+	
+	public void vacateTable(int index){
+		table[index].vacate();
+	}
+	
+	//returns index of table with best fit for the the noOfPeople booking
+	public int getBestFitIndex(int noOfPeople){
+		int tempTableID = -1;
+		if(showEmpty()==0) //if no tables are empty, return -1
+			return tempTableID;
+		int tempDifference = 10;
+		for(int i=0;i<10;i++){
+			if(table[i].getCapacity() >= noOfPeople && !table[i].isOccupied())
+				if(Math.abs(table[i].getCapacity()-noOfPeople)<=tempDifference){
+					tempDifference = Math.abs(table[i].getCapacity()-noOfPeople);
+					tempTableID = i;
+			}
+		}
+		return tempTableID;
 	}
 }

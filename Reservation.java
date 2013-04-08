@@ -2,32 +2,47 @@ import java.util.Date;
 
 
 public class Reservation {
-	Date dateOfReservation;
-	int noOfPeople;
-	int tableID;
-	String name;
-	int phoneNumber;
-	TableList table;
 	
-	public Reservation(String name, int phoneNumber, int noOfPeople, Date date){
+	private Date dateOfReservation;
+	private int noOfPeople;
+	private int tableID;
+	private String name; //key
+	private int phoneNumber; //key
+	
+	public Reservation(String name, int phoneNumber, int noOfPeople, int tableID, Date date){
 		dateOfReservation = date;
 		this.noOfPeople = noOfPeople;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 	}
 	
-	public void selectTable(int noOfPeople){
-		int tempTableID = -1;
-		int tempDifference = 10;
-		for(int i=0;i<table.getNoOfTables();i++){
-			if(table.getTable(i).capacity >= noOfPeople && !table.getTable(i).isOccupied())
-				if(Math.abs(table.getTable(i).capacity-noOfPeople)<=tempDifference){
-					tempDifference = Math.abs(table.getTable(i).capacity-noOfPeople);
-					tempTableID = i;
-			}
-		}
-		tableID = tempTableID;
-		table.getTable(tableID).occupy();
+	public Date getDate(){
+		return dateOfReservation;
+	}
+	
+	public int getNoOfPeople(){
+		return noOfPeople;
+	}
+	
+	public int getTableId(){
+		return tableID;
+	}
+	
+	public String getName(){
+		return name;
+	}
+	
+	public int getPhoneNumber(){
+		return phoneNumber;
+	}
+	
+	public void print(){
+		System.out.println("Reservation Details\nName : "+ name);
+		System.out.println("Date : "+ dateOfReservation);
+		System.out.println("No of people : "+ noOfPeople);
+		System.out.println("Table assigned : "+ tableID);
+		System.out.println("Phone Number : "+ phoneNumber);
+		
 	}
 
 }
