@@ -41,6 +41,14 @@ public class StaffList
 				return i;
 		return -1; //if no such staff with given ID exists, return -1
 	}
+   
+   public Staff getStaffByID(int ID){
+	   int index = getStaffIndex(ID);
+	   if(index<staff_list.size())
+		   return staff_list.get(index);
+	   else
+		   return null;
+   }
 	
 	
 	 public void createStaff(String staffName, char staffGender, String staffJobTitle, String staffEmailID, String staffAddress, int staffPhoneNumber){

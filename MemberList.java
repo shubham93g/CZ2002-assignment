@@ -5,10 +5,7 @@ public class MemberList
    private ArrayList<Member> member_list;
    
    public MemberList(){
-	   member_list = new ArrayList<Member>(); //How to determine the length of this array? - ArrayList
-       /*for (int i=0; i< member_list.size(); i++){ 
-		     member_list.get(i)= new Member(i+1,"a","b",0,"c",false);
-		 }*/
+	   member_list = new ArrayList<Member>();
  //---------------need to replace above code with reading of members from a file----------------------
 	  
    }
@@ -51,6 +48,14 @@ public class MemberList
 					return i;
 			return -1; //if no such item with given ID exists, return -1
 		}
+	 
+	 public Member getMemberByID(int ID){
+		 int index = getMemberIndex(ID);
+		 if(index<member_list.size())
+			 return member_list.get(index);
+		 else
+			 return null;
+	 }
 	 
 	 public void createMember(String member_name, String member_emailID, int member_phoneNumber, String member_address){
 		 int memberID = generateID();

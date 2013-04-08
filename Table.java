@@ -29,5 +29,14 @@ public class Table {
 	public int getCapacity(){
 		return capacity;
 	}
+	
+	public void print(){
+		System.out.println("Table ID : "+tableID);
+		System.out.println("Capacity : "+ tableID);
+		if(isOccupied)
+			System.out.println("Status : Occupied");
+		else
+			System.out.println("Status : Vacant");
+	}
 
 }

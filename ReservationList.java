@@ -1,16 +1,15 @@
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 
 public class ReservationList {
-	ArrayList <Reservation> reservation;
-	int noOfReservations;
-	TableList tableList;
+	private ArrayList <Reservation> reservation;
+	private TableList tableList;
 	
 	public ReservationList(TableList taableList){
 		reservation = new ArrayList<Reservation>();
-		noOfReservations = 0;
 		this.tableList = tableList;
 	}
 	
@@ -64,8 +63,19 @@ public class ReservationList {
 		int index = getIndexByName(name);
 		if(index==-1)
 			System.out.println("No reservation by the name "+name+" was found");
-		else
+		else{
 			reservation.get(index).print();
+			Date currentDate = new Date();
+			Date endDate = reservation.get(index).getEndDate();
+			if(currentDate.after(endDate)){
+				System.out.println("Reservation is now invalid.\nRemoving reservation and vacating table.");
+				removeReservation(name);
+			}
+			else
+				System.out.print("Reservation is still active");
+				
+		}
+		
 	}
 	
 	public void removeReservation(String name){

@@ -3,36 +3,38 @@ import java.util.Scanner;
 
 public class Order {
 	
-	int [] menuItems;
-	int [] menuSet;
-	int staffID;
-	int tableID;
-	//long time;
-	Date date;
-	//SimpleDateFormat date; could implement this also ?
-	int orderID;
+	private int [] menuItems;
+	private int [] menuSet;
+	private int staffID;
+	private int tableID;
+	private Date date;
+	private int orderID;
+	private Menu menu; //for list of menu items
+	private PromoMenu promoMenu; //for list of promo
+	private TableList tableList;
+	private int itemNo;
+	private int setNo;
+	private boolean active; 
 	
-	//new additions from the original
-	Menu menu; //for list of menu items
-	PromoMenu promoMenu;
-	int itemNo;
-	int setNo;
-	int pax;
-	boolean active;
-	
-	public Order(){
+	public Order(Menu menu, PromoMenu promoMenu, TableList tableList){
 		menuItems = new int[20];
 		menuSet = new int[20];
 		itemNo = 0;
 		setNo = 0;
 		active = true;
-		//need to manage dynamic allocation of array spaces
+		this.menu = menu;
+		this.promoMenu = promoMenu;
+		this.tableList = tableList;
 	}
 	
 	public void create(int staffID, int tableID){
 		//create order
 		this.staffID = staffID;
 		this.tableID = tableID;
+		if(!tableList.getTable(tableID).isOccupied())
+			tableList.occupyTable(tableID);
+		else
+			System.out.println("Error : Table is already occupied");
 		date = new Date();
 		int choice; //for user choice
 		int menuSelection; //for selection on user menu input
@@ -71,7 +73,7 @@ public class Order {
 		int choice;
 		Scanner sc = new Scanner(System.in);
 		do{
-			System.out.println("1. Update Menu Item\n2.Update Menu Set\n3. Finish");
+			System.out.println("1. Add Menu Item\n2.Add Menu Set\n3.Remove Menu Item\n4. Remove Menu Set\n5. Finish");
 			choice = sc.nextInt();
 			switch(choice){
 				case 1: this.viewOrder();
@@ -133,9 +135,9 @@ public class Order {
 		//calculate total sum of order
 		double price = 0;
 		for(int i=0;i<itemNo;i++)
-			price += menu.getMenuItem(menuItems[i]).getPrice();
+			price += menu.getMenuItemById(menuItems[i]).getPrice();
 		for(int j=0;j<setNo;j++)
-			price += promoMenu.getMenuSet(menuSet[j]).getPrice();
+			price += promoMenu.getSetByID(menuSet[j]).getPrice();
 		return price;
 	}
 	
@@ -145,18 +147,19 @@ public class Order {
 		System.out.println("Menu Items");
 		for(int i=0;i<itemNo;i++){
 			System.out.println(i+1 +". ");
-			menu.getMenuItem(menuItems[i]).printMenuItem();
+			menu.getMenuItemById(menuItems[i]).printMenuItem();
 		}
 		System.out.println("Menu Sets");
 		for(int j=0;j<setNo;j++){
 			System.out.println(j+1 +". ");
-			promoMenu.getMenuSet(menuSet[j]).printMenuSet();
+			promoMenu.getSetByID(menuSet[j]).printMenuSet();
 		}
 	}
 	
 	public void createInvoice(){
 		//create Invoice
 		active = false;
+		tableList.vacateTable(tableID);
 		viewOrder();
 		System.out.println("Total Price : " + calculateSum());
 		System.out.println("GST : 7%");

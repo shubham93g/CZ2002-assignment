@@ -22,16 +22,20 @@ public class TableList {
 	public int showEmpty(){
 		int empty = 0;
 		for(int i=0;i<10;i++)
-			if(!table[i].isOccupied())
+			if(!table[i].isOccupied()){
+				table[i].print();
 				empty++;
+			}
 		return empty;
 	}
 	
 	public int showOcupied(){
 		int occupied = 0;
 		for(int i=0;i<10;i++)
-			if(table[i].isOccupied())
+			if(table[i].isOccupied()){
+				table[i].print();
 				occupied++;
+			}
 		return occupied;
 	}
 	
@@ -43,12 +47,12 @@ public class TableList {
 		return noOfTables;
 	}
 	
-	public void occupyTable(int index){
-		table[index].occupy();
+	public void occupyTable(int tableID){
+		table[tableID].occupy();
 	}
 	
-	public void vacateTable(int index){
-		table[index].vacate();
+	public void vacateTable(int tableID){
+		table[tableID].vacate();
 	}
 	
 	//returns index of table with best fit for the the noOfPeople booking
@@ -59,8 +63,8 @@ public class TableList {
 		int tempDifference = 10;
 		for(int i=0;i<10;i++){
 			if(table[i].getCapacity() >= noOfPeople && !table[i].isOccupied())
-				if(Math.abs(table[i].getCapacity()-noOfPeople)<=tempDifference){
-					tempDifference = Math.abs(table[i].getCapacity()-noOfPeople);
+				if((table[i].getCapacity()-noOfPeople)<=tempDifference){
+					tempDifference = table[i].getCapacity()-noOfPeople;
 					tempTableID = i;
 			}
 		}

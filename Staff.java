@@ -2,8 +2,8 @@
 
 public class Staff extends Person{
 	
-	String jobTitle;
-	char gender;
+	private String jobTitle;
+	private char gender;
 
 
 	public Staff(int staffID, String staffName, char staffGender, String staffJobTitle, String staffEmailID, String staffAddress, int staffPhoneNumber){
