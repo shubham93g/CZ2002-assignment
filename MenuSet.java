@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class MenuSet extends Item{
-	
+
 	private int [] menuItemID; //array of menuItem's IDs
 	private Menu menu;
 	private int setSize;
@@ -13,7 +13,7 @@ public class MenuSet extends Item{
 	  setSize = 0;
 	  super.setID(id);
 	  }
-	 
+
 	 public void CreateMenuSet(){
 		 menu.printMenu();
 		 Scanner sc = new Scanner(System.in);
@@ -53,7 +53,7 @@ public class MenuSet extends Item{
 		 default:break;
 		 	}
 		 }while(choice!=3);
-		 
+
 		 String input;
 		 double price;
 		 System.out.print("Input set name : ");
@@ -63,11 +63,12 @@ public class MenuSet extends Item{
 		 input = sc.next();
 		 super.setDescription(input);
 		 System.out.print("Input set price : ");
+		 input=sc.nextLine(); //to catch the empty line
 		 price = sc.nextDouble();
 		 super.setPrice(price);
 		 System.out.println("Set creation successful");
 	 }
-	 
+
 	 public void updateMenuSet(){
 		 printMenuSet();
 		 Scanner sc = new Scanner(System.in);
@@ -108,16 +109,16 @@ public class MenuSet extends Item{
 		 default:break;
 		 	}
 		 }while(choice!=3);
-		 
+
 	 }
-	 
+
 	 public boolean checkItemExistsInSet(int id){
 		 for(int i=0;i<setSize;i++)
 			 if(id==menuItemID[i])
 				 return true;
 		 return false;
 	 }
-	 
+
 	 public int getIndexById(int id){
 		 for(int i=0;i<setSize;i++)
 			 if(id==menuItemID[i])
@@ -149,39 +150,3 @@ public class MenuSet extends Item{
 		  }
 	 }
 }
-		  
- 
- /*
- //Create, update, delete
-
-  //Create new menuItemID, starting by setting 3 new dishes, starter main and dessert
-  public void setDishByInfo(int category, String name, String description, double price,int getj){
-  menuItemID[getj].setCategory(category);
-  menuItemID[getj].setName(name);
-  menuItemID[getj].setDescription(description);
-  menuItemID[getj].setPrice(price); 
-  }
-  
-  //assigns values form itemId to the category of choice
-  public void setDishByItemID(int setitemID,int geti){
-  menuItemID[geti].setName(menuItemID[setitemID].getName());
-  menuItemID[geti].setPrice(menuItemID[setitemID].getPrice());
-  menuItemID[geti].setCategory(menuItemID[setitemID].getCategory());
-  menuItemID[geti].setDescription(menuItemID[setitemID].getDescription());
-  }
-  
-  //resets the values for the menuItemID
-  public void clearmenuItemID(){
-  for (int i=0; i<3; i++){
-   menuItemID[i].clearName();
-  menuItemID[i].clearPrice();
-  menuItemID[i].clearCategory();
-  menuItemID[i].clearDescription();
-  }
-  }
-  
-  
-  //sorts and prints the menuItemID
-
- }
- */

@@ -13,10 +13,15 @@ public class PromoMenu{
 		 for(int i=0;i<promoMenu.size();i++) //check if there are any items with missing IDs (as compared to index)
 			  if(getSetIndexByID(i)==-1)	//if yes, return this missing ID
 				  return i;
+			if (promoMenu.size()==0){
+	  	return 0;
+	  	}
+	  	else{
 		  int lastID = promoMenu.get(promoMenu.size()-1).getID(); //otherwise, get the last used ID
-		  while(getSetIndexByID(lastID)!=-1) //increment it till you get a new, unused ID
-			  lastID++;
-		  return lastID;
+		  while(getSetIndexByID(lastID)!=-1) {//increment it till you get a new, unused ID
+			  lastID++;}
+		  return lastID;}
+		  
 	 }
 	
 	 public void createMenuSet(){
@@ -95,6 +100,14 @@ public class PromoMenu{
 		else
 			System.out.println("No such set exists");
 	}
+	
+	
+	public void savePromoMenu
+	//for all menuitems in promomenu
+	//
+	
+	
+	
  }
 
 

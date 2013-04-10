@@ -1,10 +1,23 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
+
+public class RestaurantApp{
+public static void main(String args[]){
 
 
-public main RestaurantApp{
-int choice=0;
+//create classes
+
+Menu m = new Menu();
+PromoMenu pm = new PromoMenu(m);
+TableList t = new TableList();
+
+//initial menu
 Scanner sc = new Scanner(System.in);
-while (choice!=10) do{
+int choice=0;
+
+while (choice<10){
 System.out.println("Make your choice (1-10):");
 System.out.println("1. Create order");
 System.out.println("2. View order");
@@ -16,279 +29,267 @@ System.out.println("7. Check table availability");
 System.out.println("8. Print order invoice");
 System.out.println("9. Print sales revenue report");
 System.out.println("10. Quit");
-
 choice = sc.nextInt();
 
-switch(choice)
+//initial menu choices
+switch(choice) {
 
 case 1:
 //create order
+//initialize order for table
 break;
 
 case 2:
 //view order
+//print order of choice
 break;
 
 case 3:
 //update order
+//modify order of choice
 break;
 
 case 4:
 //manage reservation
+//create
+//reservationlist
+//view reservations
+//remove based on name
+
 break;
 
+//create, update & remove menu
 case 5:{
 int choice1=0;
-while (choice1 != 4) do{
+while (choice1 != 5 && choice1>-1){
 System.out.println("What do you want to do:");
 System.out.println("1. Create menu item");
 System.out.println("2. Update menu item");
 System.out.println("3. Remove menu item");
-System.out.println("4. Back");
+System.out.println("4. View Menu");
+System.out.println("5. Back");
 
 choice1 = sc.nextInt();
 
 switch(choice1){
 
-case1:{
-String create-name;
-String create-description;
-double create-price;
-int create-category;
-
+case 1:{
 System.out.println("--Create menu item--");
 System.out.println("Please enter the name of the item: ");
-create-name=sc.next();
+String setname=sc.nextLine();
+setname=sc.nextLine();
 System.out.println("Please enter the category of the item: ");
-create-category=sc.nextInt();
+System.out.println("1. Starter");
+System.out.println("2. Main");
+System.out.println("3. Dessert");
+int setcategory=sc.nextInt();
 System.out.println("Please enter the description of the item: ");
-create-description=sc.next();
+String setdescription=sc.nextLine();
+setdescription=sc.nextLine();
 System.out.println("Please enter the price of the item: ");
-create-price=sc.nextDouble();
-
-
-Menu.createMenuItem(create-name, create-description,create-price, create-category);
-
-
+double setprice=sc.nextDouble();
+m.createMenuItem(setname,setdescription,setprice,setcategory);
+break;
 }
 
-case2:{
+case 2:{
 int choice2;
 System.out.println("Which item do you wish to update?");
 System.out.println("Please enter the item ID");
 choice2=sc.nextInt();
+System.out.print("For itemID: "+choice2);
 //while loop to check itemID exists etc.
+
+int updatechoice1;
 System.out.println("What do you wish to update for this item?");
 System.out.println("1. Update item name");
 System.out.println("2. Update item category");
 System.out.println("3. Update item description");
 System.out.println("4. Update item price");
 System.out.println("5. Back");
+updatechoice1=sc.nextInt();
 
-
-case 1:
+switch(updatechoice1){
+case 1:{
 System.out.println("Enter the new name");
-String update-name=sc.next();
-Menu.updateMenuItemName(choice2, update-name);
-System.out.println("Menu item"+itemID+" had its name updated to "+update-name);
-break;
-case 2:
+String updatename1=sc.nextLine();
+updatename1=sc.nextLine();
+m.updateMenuItemName(choice2, updatename1);
+System.out.println("Menu item"+choice2+" had its name updated to "+updatename1);
+break;}
+case 2:{
 System.out.println("Enter the new category");
-int update-category=sc.nextInt();
-Menu.updateMenuItemCategory(choice2, update-category);
-System.out.println("Menu item"+itemID+" had its category updated to "+update-category);
-break;
-case 3:
+int updatecategory1=sc.nextInt();
+m.updateMenuItemCategory(choice2, updatecategory1);
+System.out.println("Menu item"+choice2+" had its category updated to "+updatecategory1);
+break;}
+case 3:{
 System.out.println("Enter the new description");
-String update-description=sc.next();
-Menu.updateMenuItemDescription(choice2, update-description);
-System.out.println("Menu item"+itemID+" had its description updated to "+update-description);
-break;
-case 4:
+String updatedescription1=sc.nextLine();
+updatedescription1=sc.nextLine();
+m.updateMenuItemDescription(choice2, updatedescription1);
+System.out.println("Menu item"+choice2+" had its description updated to "+updatedescription1);
+break;}
+case 4:{
 System.out.println("Enter the new price");
-double update-price=sc.nextDouble();
-Menu.updateMenuItemPrice(choice2, update-price);
-System.out.println("Menu item"+itemID+" had its name updated to "+updateprice);
+double updateprice1=sc.nextDouble();
+m.updateMenuItemPrice(choice2, updateprice1);
+System.out.println("Menu item"+choice2+" had its name updated to "+updateprice1);
+break;}
+default: {
 break;
-default: 
-break;
-
-
-
 }
+}
+break;
+}
+
 //remove menuitem
-case3:{
+case 3:{
 int choice3;
 System.out.println("--Remove menu item--");
 System.out.println("Please enter the itemID of the item you wish to remove: ");
 choice3 = sc.nextInt();
-Menu.removeMenuItem(choice3);
+m.removeMenuItem(choice3);
 System.out.println("Menu item removed succesfully");
-
+break;
 }
+case 4:{
+m.printMenu();
+break;
+}
+
 default:
 break;
 }
 
 
 }
+
 break;
-
-
+}
 //Menu promotion
 case 6:{
-choice4;
-while (choice1 != 4) do{
-System.put.println("--PROMOTION MENU--");
+int choicePromo=0;
+//choice pm
+while (choicePromo < 4){
+System.out.println("--PROMOTION MENU--");
 System.out.println("What do you want to do:");
 System.out.println("1. Create promotion menu");
 System.out.println("2. Update promotion menu");
 System.out.println("3. Remove promotion menu");
 System.out.println("4. Back");
-choice4 = sc.nextInt();
+choicePromo = sc.nextInt();
 
-switch(choice4)
-
+switch(choicePromo){
+//case 1 - create pm
 case 1:{
-int choice5=0;
-while (choice5<4)do{
-choice5=4;
-System.out.println("Do you wish to create a full promo menu (3items) or less? Please enter number of dishes: ");
-choice5=sc.nextInt();
+pm.createMenuSet();
+break;
 }
-//run creation loop for i
-int choice4=0;
-for (int i=0; i<choice;i++){
-System.out.println("For item: "+i+", do you wish to create from already existing menu items or create new menu items");
-System.out.println("1. From existing");
-System.out.println("2. Create brand new");
-choice4=nextInt();
-switch(choice4)
 
-case 1:
-System.out.println("Please enter the itemID of the item you wish to add: ");
-int set-itemID = sc.nextInt();
-setDishByItemID(set-itemID,i)
-break;
-
-case 2:
-System.out.println("--Create menu item--");
-System.out.println("Please enter the name of the item: ");
-String create-name1=sc.next();
-System.out.println("Please enter the category of the item: ");
-Int create-category1=sc.nextInt();
-System.out.println("Please enter the description of the item: ");
-String create-description1=sc.next();
-System.out.println("Please enter the price of the item: ");
-Double create-price1=sc.nextDouble();
-
-MenuSet.setDishByInfo(create-category1,create-name1, create-description1,create-price1,i);
-break;
-
-default:
-break;
-}}
-break;
-
-//update promomenu
-case 2:
-int choice6;
-PromoMenu.printPromoMenu();
+//update pm
+case 2:{
+String catchEmpty;
+int choicePromoUpdate=-1;
+pm.printPromoMenu();
+while(choicePromoUpdate<0){
 System.out.println("Which promotional menu do you wish to update? ");
-choice6=sc.nextInt();
+choicePromoUpdate=sc.nextInt();
+choicePromoUpdate--;
+}
+int choiceUpdateChoice=0;
 
-int choice7;
-//wish to update the whole menu or just one item?
-System.out.println("Wish to upgrade one item or the whole thing?");
-System.out.println("1. Update one item");
-System.out.println("2. The whole thing");
-System.out.println("3. Update SetPrice");
-choice7=sc.nextInt();
+while(choiceUpdateChoice<5){
+System.out.println("What do you wish to update? \n 1. Items in the menu set \n 2. The set price \n 3. The set name \n 4. The set description \n 5. Finished");
+choiceUpdateChoice = sc.nextInt();
 
-if (choice7=='1'){
-PromoMenu[choice6].printSetMenu();
-System.out.println("Which item do you wish to update?")
-int choice8=sc.nextInt();
-System.out.println("What do you want to update it to?")
-System.out.println("1. New item from data")
-System.out.println("2. Existing menu item?")
+switch(choiceUpdateChoice){
+
 case 1:
-System.out.println("Please enter the itemID of the item you wish to replace it with: ");
-int set-itemID = sc.nextInt();
-setDishByItemID(set-itemID,choice8)
+pm.updateSetItems(choicePromoUpdate);
 break;
 
-case 2:
-System.out.println("--Create menu item--");
-System.out.println("Please enter the name of the item: ");
-String create-name1=sc.next();
-System.out.println("Please enter the category of the item: ");
-Int create-category1=sc.nextInt();
-System.out.println("Please enter the description of the item: ");
-String create-description1=sc.next();
-System.out.println("Please enter the price of the item: ");
-Double create-price1=sc.nextDouble();
-MenuSet.setDishByInfo(create-category1,create-name1, create-description1,create-price1, choice8)
-
-
-}
-if (choice7=='2'){
-for (int j=0;j<3;j++){
-PromoMenu[choice6].printSetMenu();
-System.out.println("Item "+(j+1)+")
-int choice8=sc.nextInt();
-System.out.println("What do you want to update it to?")
-System.out.println("1. New item from data")
-System.out.println("2. Existing menu item?")
-case 1:
-System.out.println("Please enter the itemID of the item you wish to replace it with: ");
-int set-itemID = sc.nextInt();
-setDishByItemID(set-itemID,choice8)
+case 2: 
+double newSetPrice;
+System.out.println("Please enter the new set price: ");
+newSetPrice=sc.nextDouble();
+pm.updateSetPrice(choicePromoUpdate, newSetPrice);
 break;
 
-case 2:
-System.out.println("--Create menu item--");
-System.out.println("Please enter the name of the item: ");
-String create-name1=sc.next();
-System.out.println("Please enter the category of the item: ");
-Int create-category1=sc.nextInt();
-System.out.println("Please enter the description of the item: ");
-String create-description1=sc.next();
-System.out.println("Please enter the price of the item: ");
-Double create-price1=sc.nextDouble();
-MenuSet.setDishByInfo(create-category1,create-name1, create-description1,create-price1, choice8)
-
-}
-}
-
+case 3:
+String newSetName;
+System.out.println("Please enter the new set name: ");
+newSetName=sc.next();
+pm.updateSetName(choicePromoUpdate, newSetName);
 break;
 
-
-
+case 4:
+String newSetDescription;
+System.out.println("Please enter the new set price: ");
+newSetDescription=sc.nextLine();
+pm.updateSetDescription(choicePromoUpdate,newSetDescription);
+break;
+case 5:
+break;
+}
+}
+break;
+}
 
 //remove menu promo
-case 3:
-System.out.prinln("Please enter the promo menu you wish to have removed");
-int choice9=sc.nextInt();
-
-PromoMenu[choice9].clearMenuSet()
+case 3:{
+pm.printPromoMenu();
+int choicePromoRemove=0;
+while (choicePromoRemove>0){
+System.out.println("Please enter the promo menu you wish to have removed");
+choicePromoRemove=sc.nextInt();
+}
+pm.removeSetByID(choicePromoRemove);
 break;
 }
+}
+}
+}
+
 break;
 
-case 7:
+
+case 7:{
+int noEmptyTables;
+System.out.print("\n");
+noEmptyTables = t.showEmpty();
+System.out.print("\n");
+System.out.println("Number of empty tables: "+noEmptyTables);
+System.out.print("\n");
+
+break;
+}
+
+case 8:{
+//print order invoice
+//get data from the order of choice
+//print the data
+break;
+}
+
+case 9:
+//invoice
+//enter start date and end date
+//read from .txt file and save the relevant data into arraylist 
+//print the data read
+
+
 break;
 
 
-case 8:
-break;
 
 default:
 break;
 
-
-
+}
+}
+}
 }
 
 
-}
+
