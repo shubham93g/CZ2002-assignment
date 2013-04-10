@@ -150,6 +150,13 @@ public class MenuSet extends Item{
 		  }
 	 }
 	 
+
+	 public int getIDByIndex(int index){
+		return menuItemID[index];
+	 }
+	 
+	 
+	 
 	 public int getSetSize(){
 		 return setSize;
 	 }

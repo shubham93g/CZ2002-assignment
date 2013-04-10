@@ -1,13 +1,26 @@
 import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.List;
 
 public class PromoMenu{
 	private ArrayList <MenuSet> promoMenu;
 	private Menu menu;
-	
-	 public PromoMenu(Menu menu){
+	BufferedWriter out;	
+	public PromoMenu(Menu menu){
 	   promoMenu = new ArrayList<MenuSet>(); 
 	   this.menu = menu;
 	  }
+	
+	//read from file 
+	// 1 | 2 | 3 | 4
+	// Name
+	// Description
+	// Price
+	//
 	
 	 public int generateSetID(){
 		 for(int i=0;i<promoMenu.size();i++) //check if there are any items with missing IDs (as compared to index)
@@ -108,27 +121,27 @@ public class PromoMenu{
  
             out = new BufferedWriter(new FileWriter("promomenu.txt",false)); 
             for(int counter=0;counter<promoMenu.size();counter++){
-				if (promoMenu.get(counter).getName!='null' ){
-           		
-           		for(int i=0; i<promoMenu.get(dish).getSetSize();i++){
-           		out.write(promoMenu.get(counter).menuItemID[dish]
+				{
+           		for(int i=0; i<promoMenu.get(counter).getSetSize();i++){
+           		out.write(promoMenu.get(counter).getIDByIndex(i));
+           		out.write(" | ");
            		}
-           		out.write(promoMenu.get(counter).getName()+"\n"+promoMenu.get(counter).getDescription()+
+           		//add in ID
+           		out.write("\n"+promoMenu.get(counter).getID()+"\n"+promoMenu.get(counter).getName()+"\n"+promoMenu.get(counter).getDescription()+
             			"\n"+String.valueOf(promoMenu.get(counter).getPrice()));
 			out.newLine();
  			out.newLine();
-             }
-            else{
-            	System.out.println();
-            }
+				}
             }
              out.close();
              }
-             catch(IOException e){
-             System.out.println("There was a problem:" + e);
-             }
-
-}
+ 			catch(IOException e){
+ 				System.out.println("There was a problem:" + e);
+ 			}
+		catch (NumberFormatException e) {
+   //System.out.println("This is not a number");
+			}
+	}
 
 	
 	
