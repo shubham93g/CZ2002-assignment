@@ -102,10 +102,34 @@ public class PromoMenu{
 	}
 	
 	
-	public void savePromoMenu
-	//for all menuitems in promomenu
-	//
+	public void savePromoMenu(){
 	
+ try{
+ 
+            out = new BufferedWriter(new FileWriter("promomenu.txt",false)); 
+            for(int counter=0;counter<promoMenu.size();counter++){
+				if (promoMenu.get(counter).getName!='null' ){
+           		
+           		for(int i=0; i<promoMenu.get(dish).getSetSize();i++){
+           		out.write(promoMenu.get(counter).menuItemID[dish]
+           		}
+           		out.write(promoMenu.get(counter).getName()+"\n"+promoMenu.get(counter).getDescription()+
+            			"\n"+String.valueOf(promoMenu.get(counter).getPrice()));
+			out.newLine();
+ 			out.newLine();
+             }
+            else{
+            	System.out.println();
+            }
+            }
+             out.close();
+             }
+             catch(IOException e){
+             System.out.println("There was a problem:" + e);
+             }
+
+}
+
 	
 	
  }

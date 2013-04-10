@@ -27,6 +27,7 @@ try {
         String line = br.readLine();
         String tempName;
 		String tempDescription;
+		int tempID;
 	int tempCategory;
 double tempPrice;
         while(line != null) {
@@ -34,14 +35,20 @@ double tempPrice;
             line = br.readLine();
         }
         int i=0;
+        
 while (i<lines.size()){
-tempName = lines.get(i);
-tempCategory = Integer.parseInt(lines.get(i+1));
-tempDescription = lines.get(i+2);
-tempPrice= Double.parseDouble(lines.get(i+3));
-createMenuItem(tempName,tempDescription, tempPrice,tempCategory);
+tempID = Integer.parseInt(lines.get(i));
+tempName = lines.get(i+1);
+tempCategory = Integer.parseInt(lines.get(i+2));
+tempDescription = lines.get(i+3);
+tempPrice= Double.parseDouble(lines.get(i+4));
+MenuItem newMenuItem = new MenuItem(tempID, tempName, tempCategory, tempDescription, tempPrice);
+menu.add(newMenuItem);
+/*
+createMenuItem(tempName,tempDescription, tempPrice,tempCategory);*/
 i=i+5;
 }
+menuOverwrite();
         
       /*  
         for(String l : lines) {
@@ -217,8 +224,8 @@ public void menuOverwrite(){
             try{
              out = new BufferedWriter(new FileWriter("menu.txt",false)); 
              for(int counter=0;counter<menu.size();counter++){
-	if (menu.get(counter).getCategory()!=0 && menu.get(counter).getPrice()!=0.0){
-           out.write(menu.get(counter).getName()+"\n"+String.valueOf(menu.get(counter).getCategory())+
+		if (menu.get(counter).getCategory()!=0 && menu.get(counter).getPrice()!=0.0){
+           out.write(menu.get(counter).getID()+"\n"+menu.get(counter).getName()+"\n"+String.valueOf(menu.get(counter).getCategory())+
             "\n"+menu.get(counter).getDescription()+
             	"\n"+String.valueOf(menu.get(counter).getPrice()));
 			out.newLine();
