@@ -149,4 +149,8 @@ public class MenuSet extends Item{
 		  System.out.println("---------------------------------------");
 		  }
 	 }
+	 
+	 public int getSetSize(){
+		 return setSize;
+	 }
 }
