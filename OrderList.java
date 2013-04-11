@@ -89,6 +89,9 @@ public class OrderList {
 		}while(pax>10);
 		
 		tableID  = tableList.getBestFitIndex(pax);
+		if(tableID==-1)
+			System.out.println("Sorry. We are completely occupied at the moment. Please wait for 15 minutes");
+		else{
 		System.out.print("Table " + tableID + " has been assigned to this order");
 		
 		int choice; //for user choice
@@ -140,6 +143,7 @@ public class OrderList {
 					break;
 			}
 		}while(choice!=3);
+		}
 	}
 	
 	public void update(int orderID){
