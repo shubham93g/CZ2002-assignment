@@ -100,8 +100,12 @@ public class ReservationList {
 		name = sc.next();
 		System.out.print("Phone Number : ");
 		phoneNumber = sc.nextInt();
+		do{
 		System.out.print("Reservation for how many people : ");
 		noOfPeople = sc.nextInt();
+		if(noOfPeople>10)
+			System.out.println("Sorry. We can seat a maximum of 10 people");
+		}while(noOfPeople>10);
 		
 		//reading date and time
 		System.out.print("Year of reservation : ");
