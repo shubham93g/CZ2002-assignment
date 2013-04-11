@@ -184,7 +184,7 @@ public class OrderList {
 				  
 	  }
 	  
-	  private int getIndexByID(int id){
+	  public int getIndexByID(int id){
 		  for(int i=0;i<orders.size();i++)
 			  if(orders.get(i).getOrderID() == id)
 				  return i;
@@ -197,7 +197,11 @@ public class OrderList {
 				  return orders.get(i);
 		  return null; //if not found
 	  }
-	
+
+	  public Order getOrderByIndex(int index){
+		  return orders.get(index);
+	  }
+	  
 	public void create(){
 		//create order
 		Scanner sc = new Scanner(System.in);
@@ -436,6 +440,10 @@ public class OrderList {
 	
 	public int getActiveOrders(){
 		return activeOrders;
+	}
+	
+	public int getSize(){
+		return orders.size();
 	}
 
 }

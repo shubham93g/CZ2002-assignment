@@ -16,6 +16,7 @@ ReservationList rl = new ReservationList(t);
 StaffList sl = new StaffList();
 MemberList ml = new MemberList();
 OrderList ol = new OrderList(m,pm,t,sl,ml);
+RevenueReport rr = new RevenueReport(ol);
 
 //initial menu
 Scanner sc = new Scanner(System.in);
@@ -310,13 +311,18 @@ break;
 }
 
 case 8:{
+	System.out.print("Enter orderID : ");
+	orderID = sc.nextInt();
+	ol.createInvoice(orderID);
+
 //print order invoice
 //get data from the order of choice
 //print the data
 break;
 }
 
-case 9:
+case 9: rr.setPeriod();
+		rr.generateReport();
 //invoice
 //enter start date and end date
 //read from .txt file and save the relevant data into arraylist 

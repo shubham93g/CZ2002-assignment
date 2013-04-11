@@ -6,15 +6,15 @@ import java.util.Scanner;
 
 public class RevenueReport {
 	
-	private ArrayList <Order> orders;
+	private OrderList orders;
 	private Date startDate;
 	private Date endDate;
 	
-	public RevenueReport(){
+	public RevenueReport(OrderList orders){
 		//constructor
+		this.orders = orders;
 		startDate = new Date();
 		endDate = new Date();
-		setPeriod();
 		
 	}
 public void setPeriod() {
@@ -68,7 +68,8 @@ public void setPeriod() {
 		// (order.isActive()==false)&&startDate.before(order.getDate())&&endDate.after(order.getDate())
 		// read order by order and insert in arrayList is above condition is true
 		
-		
+		System.out.println("Start Date : "+startDate);
+		System.out.println("End Date : "+endDate);
 		Calendar testDate = Calendar.getInstance();
 		Calendar endDate = Calendar.getInstance();
 		testDate.setTime(this.startDate);
@@ -85,30 +86,47 @@ public void setPeriod() {
 			price = 0.0;
 			memberPrice = 0.0;
 			totalPrice = 0.0;
-			for(int i=0;i<orders.size();i++){
-				tempDate.setTime(orders.get(i).getDate());
-				if(tempDate.get(Calendar.MONTH)==testDate.get(Calendar.MONTH)&&tempDate.get(Calendar.YEAR)==testDate.get(Calendar.YEAR) && !orders.get(i).isActive()){
+			for(int i=0;i<orders.getSize();i++){
+				tempDate.setTime(orders.getOrderByIndex(i).getDate());
+				if(tempDate.get(Calendar.MONTH)==testDate.get(Calendar.MONTH)&&tempDate.get(Calendar.YEAR)==testDate.get(Calendar.YEAR) && !orders.getOrderByIndex(i).isActive()){
 					orderSize++;
-					if(orders.get(i).isMember()){
+					if(orders.getOrderByIndex(i).isMember()){
 						memberSize++;
-						memberPrice+= orders.get(i).getTotalPrice()*0.9;
-						totalPrice += memberPrice;
+						memberPrice+= orders.getOrderByIndex(i).getTotalPrice()*0.9;
 					}
 					else{ //if not member
-						price += orders.get(i).getTotalPrice();
-						totalPrice += price;
+						price += orders.getOrderByIndex(i).getTotalPrice();
 					}
 				}//end of if
 			}
-			System.out.println("Month  				     : " + testDate.get(Calendar.MONDAY));
-			System.out.println("Total revenue 			 : SGD "+ totalPrice);
-			System.out.println("Total no.of order 		 : "+ orderSize);
-			System.out.println("No.of orders by members  : "+ memberSize);
+			totalPrice = memberPrice + price;
+			System.out.println("Month : " + monthDigitToString(testDate.get(Calendar.MONTH)));
+			System.out.println("Total revenue : SGD "+ totalPrice);
+			System.out.println("Total no.of order : "+ orderSize);
+			System.out.println("No.of orders by members : "+ memberSize);
 			System.out.println("Revenue from non-members : SGD "+ price);
-			System.out.println("Revenue from members 	 : SGD "+ memberPrice + "\n");
+			System.out.println("Revenue from members : SGD "+ memberPrice + "\n");
 			month = testDate.get(Calendar.MONTH); 
 			testDate.set(Calendar.MONTH,month+1); //increment date by 1
 		}
+	}
+	
+	public String monthDigitToString(int month){
+		switch(month){
+		case 0:return "Janurary";
+		case 1: return "February";
+		case 2: return "March";
+		case 3: return "April";
+		case 4: return "May";
+		case 5: return "June";
+		case 6: return "July";
+		case 7: return "August";
+		case 8: return "September";
+		case 9: return"October";
+		case 10: return "Novermber";
+		case 11: return "December";
+		}
+		return null;
 	}
 
 }
