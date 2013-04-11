@@ -13,12 +13,14 @@ Menu m = new Menu();
 PromoMenu pm = new PromoMenu(m);
 TableList t = new TableList();
 ReservationList rl = new ReservationList(t);
+StaffList sl = new StaffList();
+MemberList ml = new MemberList();
 
 //initial menu
 Scanner sc = new Scanner(System.in);
 int choice=0;
 
-while (choice<10){
+while (choice<11){
 System.out.println("Make your choice (1-10):");
 System.out.println("1. Create order");
 System.out.println("2. View order");
@@ -29,7 +31,9 @@ System.out.println("6. Create/update/remove promotion");
 System.out.println("7. Check table availability");
 System.out.println("8. Print order invoice");
 System.out.println("9. Print sales revenue report");
-System.out.println("10. Quit");
+System.out.println("10. Manage staff");
+System.out.println("11. Manage members");
+System.out.println("12. Quit");
 choice = sc.nextInt();
 
 //initial menu choices
@@ -299,10 +303,20 @@ case 9:
 //enter start date and end date
 //read from .txt file and save the relevant data into arraylist 
 //print the data read
-
-
 break;
 
+
+//staff
+case 10:
+	System.out.println("----PRINTING STAFF-----");
+	sl.printAllStaff();
+	break;
+	
+	//members
+case 11:
+	System.out.println("----PRINTING ALL MEMBERS----");
+	ml.printAllMembers();
+	break;
 
 
 default:

@@ -25,6 +25,7 @@ public class PromoMenu{
 		int tempID;
 		double tempPrice;
 		int tempMenuItemID;
+		int tempSetSize;
         while(line != null) {
             lines.add(line.replace("<", ""));
             line = br.readLine();
@@ -33,26 +34,22 @@ public class PromoMenu{
         
 while (i<lines.size()){
 	 tempID = Integer.parseInt(lines.get(i));
+	 tempSetSize = Integer.parseInt(lines.get(i+1));
 	 MenuSet tempMenuSet = new MenuSet(menu,tempID);
-	 String menuIDwithCrap = lines.get(i+1);
-	 //int []menuItemID = new int[10];
-	 for(int k =0;k<menuIDwithCrap.length();k++){
-		 char c = menuIDwithCrap.charAt(k);
-		 if(Character.isDigit(c))
-			 tempMenuSet.addMenuItem(Character.getNumericValue(c));
+	 String[] menuIDWithSeparator = lines.get(i+2).split("\\|");
+	 for(int k =0;k<tempSetSize;k++){
+		 tempMenuItemID=Integer.parseInt(menuIDWithSeparator[k]);
+		 tempMenuSet.addMenuItem(tempMenuItemID);
 	 }
-	 //for(int j = 0; j < strArray.length; j++) {
-	 //    tempMenuItemID= Integer.parseInt(strArray[j]);
-	     //addMenuItem(tempID, tempMenuItemID);
-	  //   tempMenuSet.addMenuItem(tempMenuItemID);
-			tempName = lines.get(i+2);
-			tempDescription = lines.get(i+3);
-			tempPrice= Double.parseDouble(lines.get(i+4));
+
+			tempName = lines.get(i+3);
+			tempDescription = lines.get(i+4);
+			tempPrice= Double.parseDouble(lines.get(i+5));
 			tempMenuSet.setName(tempName);
 			tempMenuSet.setDescription(tempDescription);
 			tempMenuSet.setPrice(tempPrice);
 			promoMenu.add(tempMenuSet);
-			i=i+6;
+			i=i+7;
 			}
 	br.close();
 
@@ -188,7 +185,7 @@ while (i<lines.size()){
             out = new BufferedWriter(new FileWriter("promomenu.txt",false)); 
             for(int counter=0;counter<promoMenu.size();counter++){
 				{
-				out.write(promoMenu.get(counter).getID()+"\n");
+				out.write(promoMenu.get(counter).getID()+"\n"+promoMenu.get(counter).getSetSize()+"\n");
            		for(int i=0; i<promoMenu.get(counter).getSetSize();i++){
            		id = promoMenu.get(counter).getIDByIndex(i);
            		//System.out.print("Test id :" + id);
