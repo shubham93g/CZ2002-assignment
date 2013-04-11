@@ -1,16 +1,84 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
-
+import java.util.Calendar;
+import java.util.Date;
 
 public class ReservationList {
 	private ArrayList <Reservation> reservation;
 	private TableList tableList;
+	   BufferedWriter out;
+	   BufferedReader in;
 	
 	public ReservationList(TableList taableList){
 		reservation = new ArrayList<Reservation>();
 		this.tableList = tableList;
+		
+		
+		//read from file
+		
+		try {
+			File file = new File("reservation.txt");
+	        BufferedReader br = new BufferedReader(new FileReader(file));
+	        List<String> lines = new ArrayList<String>();
+	        String line = br.readLine();
+	        String tempName;
+			int tempID;
+			String tempAddress;
+			String tempEmailID;
+			int tempPhoneNumber;
+			int tempNoOfPeople;
+			int tempTableID;
+			int year, month, date, hour, minute;
+			Calendar bookingTime = Calendar.getInstance();
+	        while(line != null) {
+	            lines.add(line.replace(">", ""));
+	            line = br.readLine();
+	        }
+	        int i=0;
+	        
+	while (i<lines.size()){
+	tempName = lines.get(i+1);
+	tempPhoneNumber = Integer.parseInt(lines.get(i+2));
+	tempNoOfPeople= Integer.parseInt(lines.get(i+3));
+	tempTableID = Integer.parseInt(lines.get(i+4));
+	
+	year = Integer.parseInt(lines.get(i+5));
+	month = Integer.parseInt(lines.get(i+6));
+	date = Integer.parseInt(lines.get(i+7));
+	hour = Integer.parseInt(lines.get(i+8));
+	minute = Integer.parseInt(lines.get(i+9));
+	
+	bookingTime.set(Calendar.YEAR, year);
+	bookingTime.set(Calendar.MONTH, month-1);
+	bookingTime.set(Calendar.DAY_OF_MONTH, date);
+	bookingTime.set(Calendar.HOUR_OF_DAY, hour);
+	bookingTime.set(Calendar.MINUTE, minute);
+	
+	Reservation tempReservation = new Reservation(tempName, tempPhoneNumber, tempNoOfPeople, tempTableID, bookingTime.getTime());
+	reservation.add(tempReservation);
+	i=i+10;
+	}
+
+	        br.close();
+	        }
+	        
+	         		  catch(IOException e){
+	             System.out.println("There was a problem:" + e);
+	         }
+	 			catch (NumberFormatException e) {
+	           //System.out.println("This is not a number");
+	       }
+		
+		
 	}
 	
 	public int getIndexByName(String name){
@@ -25,6 +93,7 @@ public class ReservationList {
 		String name;
 		int phoneNumber;
 		int noOfPeople;
+		//how to handle date?
 		int year, month, date, hour, minute;
 		Calendar bookingTime = Calendar.getInstance();
 		System.out.print("Input the following details\nName : ");
@@ -88,4 +157,25 @@ public class ReservationList {
 			System.out.println("Reservation removed");
 		}
 	}
+	
+	public void reservationListOverwrite(){
+        try{
+         out = new BufferedWriter(new FileWriter("memberlist.txt",false)); 
+         for(int counter=0;counter<reservation.size();counter++){
+        	 	out.write(reservation.get(counter).getName()+"\n"+	String.valueOf(reservation.get(counter).getPhoneNumber())+"\n"+	String.valueOf(reservation.get(counter).getNoOfPeople())+"\n"+
+    		   	String.valueOf(reservation.get(counter).getTableId())+
+        "\n"+	reservation.get(counter).getDate());
+        	out.newLine();
+			out.newLine();
+         }
+         out.close();
+         }
+         catch(IOException e){
+         System.out.println("There was a problem:" + e);
+         }
+
+}
+	
+	
+	
 }

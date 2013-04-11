@@ -170,12 +170,13 @@ i=i+5;
             out = new BufferedWriter(new FileWriter("promomenu.txt",false)); 
             for(int counter=0;counter<promoMenu.size();counter++){
 				{
+				out.write(promoMenu.get(counter).getID()+"\n");
            		for(int i=0; i<promoMenu.get(counter).getSetSize();i++){
            		out.write(promoMenu.get(counter).getIDByIndex(i));
            		out.write(" | ");
            		}
            		//add in ID
-           		out.write("\n"+promoMenu.get(counter).getID()+"\n"+promoMenu.get(counter).getName()+"\n"+promoMenu.get(counter).getDescription()+
+           		out.write("\n"+promoMenu.get(counter).getName()+"\n"+promoMenu.get(counter).getDescription()+
             			"\n"+String.valueOf(promoMenu.get(counter).getPrice()));
 			out.newLine();
  			out.newLine();
