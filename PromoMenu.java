@@ -4,18 +4,66 @@ import java.util.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 public class PromoMenu{
 	private ArrayList <MenuSet> promoMenu;
 	private Menu menu;
 	BufferedWriter out;	
+	BufferedReader in;
 	public PromoMenu(Menu menu){
 	   promoMenu = new ArrayList<MenuSet>(); 
 	   this.menu = menu;
-	  }
+	try {
+		File file = new File("promomenu.txt");
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        List<String> lines = new ArrayList<String>();
+        String line = br.readLine();
+        String tempName;
+		String tempDescription;
+		int tempID;
+		int tempCategory;
+		double tempPrice;
+		int tempMenuItemID;
+        while(line != null) {
+            lines.add(line.replace("|", ""));
+            line = br.readLine();
+        }
+        int i=0;
+        
+while (i<lines.size()){
+	 tempID = Integer.parseInt(lines.get(i+1));
+	 MenuSet tempMenuSet = new MenuSet(menu,tempID);
+	 tempMenuSet.CreateMenuSet();
+	 promoMenu.add(tempMenuSet);
+	String[] strArray = lines.get(i).split(" | ");
+	for(int j = 0; j < strArray.length; j++) {
+	     tempMenuItemID= Integer.parseInt(strArray[j]);
+	     promoMenu.addMenuItemToMenuSet(tempID, tempMenuItemID);
+	}
 	
-	//read from file 
+
+
+
+tempName = lines.get(i+2);
+tempDescription = lines.get(i+3);
+tempPrice= Double.parseDouble(lines.get(i+4));
+i=i+5;
+}
+	br.close();
+
+	}
+ 		  catch(IOException e){
+     System.out.println("There was a problem:" + e);
+ }
+		catch (NumberFormatException e) {
+   //System.out.println("This is not a number");
+}
+
+	}
+	
+	//SetID
 	// 1 | 2 | 3 | 4
 	// Name
 	// Description
@@ -145,7 +193,7 @@ public class PromoMenu{
 
 	
 	
- }
+} 
 
 
 
