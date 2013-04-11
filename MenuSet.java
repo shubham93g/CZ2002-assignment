@@ -20,8 +20,6 @@ public class MenuSet extends Item{
 		 int choice;
 		 int userInput;
 		 int index;
-		 String input;
-		 double price;
 		 do{
 		 System.out.println("Select choice\n1. Add Menu Item\n2. Remove\n3. Finish");
 		 choice = sc.nextInt();
@@ -33,7 +31,8 @@ public class MenuSet extends Item{
 			 	System.out.print("Input MenuItem id to add : ");
 		 		userInput = sc.nextInt();
 		 		if(menu.checkMenuItem(userInput)){
-		 			addMenuItem(userInput);
+		 			menuItemID[setSize] = userInput;
+		 			setSize++;
 		 			System.out.println("Item added to set");
 		 		}
 		 		else
@@ -50,24 +49,24 @@ public class MenuSet extends Item{
 	 			else
 	 				System.out.println("No such item exists in set");
 	 			break;
-		 case 3:System.out.print("Input set name : ");
-				 input = sc.next();
-				 super.setName(input);
-				 System.out.print("Input set description : ");
-				 input = sc.next();
-				 super.setDescription(input);
-				 System.out.print("Input set price : ");
-				 input=sc.nextLine(); //to catch the empty line
-				 price = sc.nextDouble();
-				 super.setPrice(price);
-				 System.out.println("Set creation successful");
-			 	break;
+		 case 3:break;
 		 default:break;
 		 	}
 		 }while(choice!=3);
 
-		 
-		 
+		 String input;
+		 double price;
+		 System.out.print("Input set name : ");
+		 input = sc.next();
+		 super.setName(input);
+		 System.out.print("Input set description : ");
+		 input = sc.next();
+		 super.setDescription(input);
+		 System.out.print("Input set price : ");
+		 input=sc.nextLine(); //to catch the empty line
+		 price = sc.nextDouble();
+		 super.setPrice(price);
+		 System.out.println("Set creation successful");
 	 }
 
 	 public void updateMenuSet(){
@@ -80,14 +79,15 @@ public class MenuSet extends Item{
 		 System.out.println("Select choice\n1. Add Menu Item\n2. Remove\n3. Finish");
 		 choice = sc.nextInt();
 		 switch(choice){
-		 case 1:if(setSize>=10){
+		 case 1:if(setSize==10){
 			 		System.out.println("Max items per set reached. Cannot add more items.");
 		 			break;
 		 		}
 			 	System.out.print("Input MenuItem id to add : ");
 		 		userInput = sc.nextInt();
 		 		if(menu.checkMenuItem(userInput)){
-		 			addMenuItem(userInput);
+		 			menuItemID[setSize] = userInput;
+		 			setSize++;
 		 			System.out.println("Item added to set");
 		 		}
 		 		else
@@ -110,15 +110,6 @@ public class MenuSet extends Item{
 		 	}
 		 }while(choice!=3);
 
-	 }
-	 
-	 public void addMenuItem(int itemID){
-		 if(setSize>=10)
-			 System.out.println("Cannot add more items to set");
-		 else{
-		 menuItemID[setSize] = itemID;
-		 setSize++;
-		 }
 	 }
 
 	 public boolean checkItemExistsInSet(int id){
