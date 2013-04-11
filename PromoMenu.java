@@ -146,15 +146,6 @@ i=i+5;
 			System.out.println("Update failed. Set ID invalid.");
 	}
 	
-	public void addMenuItem(int setID, int menuItemID){
-		int index = this.getSetIndexByID(setID);
-		if(index!=-1){
-			promoMenu.get(index).addMenuItem(menuItemID);
-		}
-		else
-			System.out.println("Error : Invalid setID");
-	}
-	
 	public void updateSetItems(int setID){
 		int index = getSetIndexByID(setID);
 		if(index!=-1)
