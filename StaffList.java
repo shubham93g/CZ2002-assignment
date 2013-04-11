@@ -8,7 +8,11 @@ public class StaffList
    public StaffList()
    {
 	   staff_list=new ArrayList <Staff>(); //How to determine the length of this array?
-	   //---------------need to add code to read members from a file----------------------
+       /*for (int i=0; i< staff_list.size(); i++)
+		 { 
+		     staff_list[i]= new Staff("a","m","b",i+1,0);
+		 }*/
+	   //---------------need to replace above code with reading of members from a file----------------------
 }
 	
    public boolean checkStaff(int staff_employeeID){ //to check staff by staffID
