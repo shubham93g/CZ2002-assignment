@@ -15,16 +15,17 @@ TableList t = new TableList();
 ReservationList rl = new ReservationList(t);
 StaffList sl = new StaffList();
 MemberList ml = new MemberList();
+OrderList ol = new OrderList(m,pm,t,sl,ml);
 
 //initial menu
 Scanner sc = new Scanner(System.in);
-int choice=0;
+int choice=0,orderID;
 
 while (choice<11){
 System.out.println("Make your choice (1-10):");
 System.out.println("1. Create order");
 System.out.println("2. View order");
-System.out.println("3. Update order");
+System.out.println("3. Change order");
 System.out.println("4. Manage reservations ");
 System.out.println("5. Create/update/remove menu");
 System.out.println("6. Create/update/remove promotion");
@@ -39,17 +40,34 @@ choice = sc.nextInt();
 //initial menu choices
 switch(choice) {
 
-case 1:
+case 1: ol.create();
 //create order
 //initialize order for table
 break;
 
 case 2:
+System.out.print("Enter orderID : ");
+orderID = sc.nextInt();
+Order order = ol.getOrderByID(orderID);
+if(ol.checkOrderById(orderID))
+	ol.viewOrder(order);
 //view order
 //print order of choice
 break;
 
-case 3:
+case 3: System.out.println("\n\n1. Update order\n2.Cancel order\n");
+choice = sc.nextInt();
+switch(choice){
+		case 1:System.out.print("Enter orderID : ");
+				orderID = sc.nextInt();
+				ol.update(orderID);
+				break;
+		case 2:System.out.print("Enter orderID : ");
+				orderID = sc.nextInt();
+				ol.cancel(orderID);
+				break;
+		default : System.out.println("Error : Check input");
+}
 //update order
 //modify order of choice
 break;

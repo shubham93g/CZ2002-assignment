@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
@@ -38,12 +39,10 @@ public class OrderList {
 	        BufferedReader br = new BufferedReader(new FileReader(file));
 	        List<String> lines = new ArrayList<String>();
 	        String line = br.readLine();
-	        Order order;
 	        while(line != null) {
 	            lines.add(line.replace(">", ""));
 	            line = br.readLine();
 	        }
-	        int i=0;
 	        //data storing sequence
 	        //orderID
 	        //staffID
@@ -55,59 +54,102 @@ public class OrderList {
 	        //[]setID
 	        //isMember
 	        //active
-	        //doublePrice
-	        int orderID, staffID, tableID, pax, itemSize, setSize;
-	        
-			while (i<lines.size()){
-			tempID = Integer.parseInt(lines.get(i));
-			tempName = lines.get(i+1);
-			tempCategory = Integer.parseInt(lines.get(i+2));
-			tempDescription = lines.get(i+3);
-			tempPrice= Double.parseDouble(lines.get(i+4));
-			MenuItem newMenuItem = new MenuItem(tempID, tempName, tempCategory, tempDescription, tempPrice);
-			menu.add(newMenuItem);
-			/*
-			createMenuItem(tempName,tempDescription, tempPrice,tempCategory);*/
-			i=i+6;
-			}
-			//menuOverwrite();
-	        
-			/*  
-	        for(String l : lines) {
-	            System.out.println(l);
-	        }*/
-	        br.close();
+	        //Price
+	        //date
+	        int orderID, staffID, tableID, pax, itemSize, setSize, tempItemID, tempSetID;
+	        boolean isMember, active;
+	        double price;
+	        Order order;
+	        Calendar date = Calendar.getInstance();
+	        while(line != null) {
+	            lines.add(line.replace("<", ""));
+	            line = br.readLine();
 	        }
+	        int i=0;
 	        
-	         		  catch(IOException e){
-	             System.out.println("There was a problem:" + e);
-	         }
-	 			catch (NumberFormatException e) {
-	           //System.out.println("This is not a number");
-	       }
-
+	        while (i<lines.size()){
+				 orderID = Integer.parseInt(lines.get(i));
+				 staffID = Integer.parseInt(lines.get(i+1));
+				 tableID = Integer.parseInt(lines.get(i+2));
+				 pax = 	   Integer.parseInt(lines.get(i+3));
+				 itemSize= Integer.parseInt(lines.get(i+4));
+				 String[] itemID = lines.get(i+5).split("\\|");
+				 setSize = Integer.parseInt(lines.get(i+6));				
+				 String[] setID = lines.get(i+7).split("\\|");
+				 isMember= Boolean.parseBoolean(lines.get(i+8)); 
+				 active =  Boolean.parseBoolean(lines.get(i+9)); 
+				 price =   Double.parseDouble(lines.get(i+10));
+				 String[] stringDate = lines.get(i+11).split("\\|");
+				 //format for date : year month day hour minute
+				 date.set(Integer.parseInt(stringDate[0]), 
+						 Integer.parseInt(stringDate[1]),Integer.parseInt(stringDate[2]), Integer.parseInt(stringDate[3]), Integer.parseInt(stringDate[4]));
+				 order =   new Order(orderID,0,0,staffID,tableID,pax,date.getTime(),isMember,active,price);
+				 for(int k =0;k<itemSize;k++){
+					 tempItemID=Integer.parseInt(itemID[k]);
+					 order.addMenuItem(tempItemID);
+				 	}
+				 for(int l =0;l<setSize;l++){
+					 tempSetID=Integer.parseInt(setID[l]);
+					 order.addMenuSet(tempSetID);
+				 	}
+				 orders.add(order);
+				 i+=13;
+			}
+				br.close();
+		
+		}
+	 		  catch(IOException e){
+	 			  System.out.println("There was a problem:" + e);
+	 		  }
+			catch (NumberFormatException e) {
+				//System.out.println("This is not a number");
+			}
 		
 		for(int i=0;i<orders.size();i++)
 			if(orders.get(i).isActive())
 				activeOrders++;
 	}
 	
-	public void menuOverwrite(){
+	public void orderOverWrite(){
         try{
-         out = new BufferedWriter(new FileWriter("menu.txt",false)); 
-         for(int counter=0;counter<menu.size();counter++){
-	if (menu.get(counter).getCategory()!=0 && menu.get(counter).getPrice()!=0.0){
-	 out.write(menu.get(counter).getID()+"\n"+
-    		   menu.get(counter).getName()+"\n"+
-    		   String.valueOf(menu.get(counter).getCategory())+"\n"+
-    		   menu.get(counter).getDescription()+"\n"+
-    		   String.valueOf(menu.get(counter).getPrice()));
+         out = new BufferedWriter(new FileWriter("order.txt",false)); 
+         int tempItemID, tempSetID;
+         Calendar date = Calendar.getInstance();
+       //data storing sequence
+	        //orderID
+	        //staffID
+	        //tableID
+	        //pax
+	        //itemSize
+	        //[]itemID
+	        //setSize
+	        //[]setID
+	        //isMember
+	        //active
+	        //Price
+	        //date
+         for(int counter=0;counter<orders.size();counter++){
+        	 date.setTime(orders.get(counter).getDate());
+	 out.write(orders.get(counter).getOrderID()+"\n"+
+    		   orders.get(counter).getStaffID()+"\n"+
+    		   orders.get(counter).getTableID()+"\n"+
+    		   orders.get(counter).getPax()+"\n"+
+    		   orders.get(counter).getItemSize()+"\n");
+	 		for(int i=0;i<orders.get(counter).getItemSize();i++){
+	 			tempItemID = orders.get(counter).getItemIdByIndex(i);
+	 			out.write(String.valueOf(tempItemID)+"|");
+	 		}
+	 			out.write("\n"+orders.get(counter).getSetSize()+"\n");
+	 		for(int j=0;j<orders.get(counter).getItemSize();j++){
+		 			tempSetID = orders.get(counter).getSetIdByIndex(j);
+		 			out.write(String.valueOf(tempSetID)+"|");
+		 		}	
+    		   out.write("\n"+orders.get(counter).isMember()+"\n"+
+		 		orders.get(counter).isActive()+"\n"+
+    		   String.valueOf(orders.get(counter).getTotalPrice())+"\n"+
+		 		date.get(Calendar.YEAR)+"|"+date.get(Calendar.MONTH)+"|"+date.get(Calendar.DAY_OF_MONTH)+"|"+date.get(Calendar.HOUR_OF_DAY)+"|"+date.get(Calendar.MINUTE)+"|");
 				out.newLine();
 				out.newLine();
-         }
-        else{
-        System.out.println();
-        }
         }
          out.close();
          }
@@ -220,10 +262,12 @@ public class OrderList {
 						choice = 1; //to prevent the loop from ending
 					}
 					else{
+						order.setTotalPrice(calculateSum(order));
 						orders.add(order);
 						tableList.occupyTable(tableID);
 						System.out.println("Order creation successful");
 						this.viewOrder(order);
+						orderOverWrite();
 						activeOrders++;
 					}
 					break;
@@ -296,8 +340,10 @@ public class OrderList {
 		
 				case 5: System.out.println("Order update successful");
 						this.viewOrder(order);
+						order.setTotalPrice(calculateSum(order));
 						orders.remove(index); //remove old order
 						orders.add(order); //re-add updated order
+						orderOverWrite();
 						break;
 				default:System.out.println("Check input value");
 						break;
@@ -318,6 +364,7 @@ public class OrderList {
 			this.viewOrder(order);
 			tableList.vacateTable(order.getTableID());
 			orders.remove(index);
+			orderOverWrite();
 			activeOrders--;
 			System.out.println("Order cancelled. Table " +order.getTableID() + " is now vacant");
 		}
@@ -383,6 +430,7 @@ public class OrderList {
 		tableList.vacateTable(order.getTableID());
 		orders.remove(index);
 		orders.add(order);
+		orderOverWrite();
 		activeOrders--;
 	}
 	
