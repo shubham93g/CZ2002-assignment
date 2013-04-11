@@ -13,6 +13,7 @@ public class Order {
 	private int setSize;  //no of menuSet
 	private boolean isMember;
 	private boolean active; 
+	private double totalPrice;
 	
 	public Order(int orderID, int itemSize, int setSize, int staffID, int tableID, int pax){
 		this.orderID = orderID;
@@ -176,6 +177,14 @@ public class Order {
 	
 	public void orderIsByMember(){
 		isMember = true;
+	}
+	
+	public double getTotalPrice(){
+		return totalPrice;
+	}
+	
+	public void setTotalPrice(double price){
+		this.totalPrice = price;
 	}
 	
 }

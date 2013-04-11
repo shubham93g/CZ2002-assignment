@@ -291,6 +291,7 @@ public class OrderList {
 		System.out.println("Price after GST : " + price*1.07);
 		
 		order.closeOrder();
+		order.setTotalPrice(price);
 		tableList.vacateTable(order.getTableID());
 		orders.remove(index);
 		orders.add(order);
