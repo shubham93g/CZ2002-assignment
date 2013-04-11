@@ -40,7 +40,7 @@ while (i<lines.size()){
 	String[] strArray = lines.get(i).split(" | ");
 	for(int j = 0; j < strArray.length; j++) {
 	     tempMenuItemID= Integer.parseInt(strArray[j]);
-	     promoMenu.addMenuItemToMenuSet(tempID, tempMenuItemID);
+	     addMenuItem(tempID, tempMenuItemID);
 	}
 	
 
