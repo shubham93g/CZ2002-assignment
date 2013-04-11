@@ -31,7 +31,7 @@ public class Order {
 	
 	
 	//Douglas - this constructor is specifically for your convenience. Will make it easier for you to get data from files into arrayList.
-	protected Order(int orderID, int [] menuItems, int itemSize, int [] menuSet, int setSize, int staffID, int tableID, int pax, Date date,boolean isMember, boolean active){
+	protected Order(int orderID, int [] menuItems, int itemSize, int [] menuSet, int setSize, int staffID, int tableID, int pax, Date date,boolean isMember, boolean active, double price){
 		this.orderID = orderID;
 		this.menuItems = new int[50];
 		System.arraycopy(menuItems, 0, this.menuItems, 0, menuItems.length);
@@ -45,6 +45,7 @@ public class Order {
 		this.pax = pax;
 		this.isMember = isMember;
 		this.active = active;
+		this.totalPrice = price;
 	}
 	
 	private int getItemIndexByID(int itemID){

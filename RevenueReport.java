@@ -69,11 +69,45 @@ public void setPeriod() {
 		// read order by order and insert in arrayList is above condition is true
 		
 		
-		Calendar midDate = Calendar.getInstance();
-		midDate.setTime(startDate);
-		midDate.set(Calendar.MONTH, midDate.get(Calendar.MONTH)+1);
-		while(midDate.getTime().before(endDate)){
-			//need tp fpnish code
+		Calendar testDate = Calendar.getInstance();
+		Calendar endDate = Calendar.getInstance();
+		testDate.setTime(this.startDate);
+		endDate.setTime(this.endDate);
+		Calendar tempDate = Calendar.getInstance();
+		int orderSize, memberSize, month;
+		double price;
+		double memberPrice;
+		double totalPrice;
+		//midDate.set(Calendar.MONTH, midDate.get(Calendar.MONTH)+1);
+		while(testDate.before(endDate)){
+			orderSize = 0;
+			memberSize = 0;
+			price = 0.0;
+			memberPrice = 0.0;
+			totalPrice = 0.0;
+			for(int i=0;i<orders.size();i++){
+				tempDate.setTime(orders.get(i).getDate());
+				if(tempDate.get(Calendar.MONTH)==testDate.get(Calendar.MONTH)&&tempDate.get(Calendar.YEAR)==testDate.get(Calendar.YEAR) && !orders.get(i).isActive()){
+					orderSize++;
+					if(orders.get(i).isMember()){
+						memberSize++;
+						memberPrice+= orders.get(i).getTotalPrice()*0.9;
+						totalPrice += memberPrice;
+					}
+					else{ //if not member
+						price += orders.get(i).getTotalPrice();
+						totalPrice += price;
+					}
+				}//end of if
+			}
+			System.out.println("Month  				     : " + testDate.get(Calendar.MONDAY));
+			System.out.println("Total revenue 			 : SGD "+ totalPrice);
+			System.out.println("Total no.of order 		 : "+ orderSize);
+			System.out.println("No.of orders by members  : "+ memberSize);
+			System.out.println("Revenue from non-members : SGD "+ price);
+			System.out.println("Revenue from members 	 : SGD "+ memberPrice + "\n");
+			month = testDate.get(Calendar.MONTH); 
+			testDate.set(Calendar.MONTH,month+1); //increment date by 1
 		}
 	}
 

@@ -1,4 +1,11 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -12,6 +19,9 @@ public class OrderList {
 	private ArrayList <Order> orders;
 	private int activeOrders;
 	
+	BufferedWriter out;
+	BufferedReader in;
+	
 	public OrderList(Menu menu, PromoMenu promoMenu, TableList tableList, StaffList staffList, MemberList memberList){
 		
 		this.menu = menu;
@@ -23,11 +33,89 @@ public class OrderList {
 		activeOrders = 0;
 		
 //---------------need to add code to read orders from a file----------------------
+		try {
+			File file = new File("order.txt");
+	        BufferedReader br = new BufferedReader(new FileReader(file));
+	        List<String> lines = new ArrayList<String>();
+	        String line = br.readLine();
+	        Order order;
+	        while(line != null) {
+	            lines.add(line.replace(">", ""));
+	            line = br.readLine();
+	        }
+	        int i=0;
+	        //data storing sequence
+	        //orderID
+	        //staffID
+	        //tableID
+	        //pax
+	        //itemSize
+	        //[]itemID
+	        //setSize
+	        //[]setID
+	        //isMember
+	        //active
+	        //doublePrice
+	        int orderID, staffID, tableID, pax, itemSize, setSize;
+	        
+			while (i<lines.size()){
+			tempID = Integer.parseInt(lines.get(i));
+			tempName = lines.get(i+1);
+			tempCategory = Integer.parseInt(lines.get(i+2));
+			tempDescription = lines.get(i+3);
+			tempPrice= Double.parseDouble(lines.get(i+4));
+			MenuItem newMenuItem = new MenuItem(tempID, tempName, tempCategory, tempDescription, tempPrice);
+			menu.add(newMenuItem);
+			/*
+			createMenuItem(tempName,tempDescription, tempPrice,tempCategory);*/
+			i=i+6;
+			}
+			//menuOverwrite();
+	        
+			/*  
+	        for(String l : lines) {
+	            System.out.println(l);
+	        }*/
+	        br.close();
+	        }
+	        
+	         		  catch(IOException e){
+	             System.out.println("There was a problem:" + e);
+	         }
+	 			catch (NumberFormatException e) {
+	           //System.out.println("This is not a number");
+	       }
+
 		
 		for(int i=0;i<orders.size();i++)
 			if(orders.get(i).isActive())
 				activeOrders++;
 	}
+	
+	public void menuOverwrite(){
+        try{
+         out = new BufferedWriter(new FileWriter("menu.txt",false)); 
+         for(int counter=0;counter<menu.size();counter++){
+	if (menu.get(counter).getCategory()!=0 && menu.get(counter).getPrice()!=0.0){
+	 out.write(menu.get(counter).getID()+"\n"+
+    		   menu.get(counter).getName()+"\n"+
+    		   String.valueOf(menu.get(counter).getCategory())+"\n"+
+    		   menu.get(counter).getDescription()+"\n"+
+    		   String.valueOf(menu.get(counter).getPrice()));
+				out.newLine();
+				out.newLine();
+         }
+        else{
+        System.out.println();
+        }
+        }
+         out.close();
+         }
+         catch(IOException e){
+         System.out.println("There was a problem:" + e);
+         }
+
+}
 	
 	  //function to check if an order with given ID exists  
 	  public boolean checkOrderById(int id){
