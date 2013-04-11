@@ -9,8 +9,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Calendar;
-import java.util.Date;
 
 public class ReservationList {
 	private ArrayList <Reservation> reservation;
@@ -26,7 +24,7 @@ public class ReservationList {
 		//read from file
 		
 		try {
-			File file = new File("reservation.txt");
+			File file = new File("reservationlist.txt");
 	        BufferedReader br = new BufferedReader(new FileReader(file));
 	        List<String> lines = new ArrayList<String>();
 	        String line = br.readLine();
@@ -65,7 +63,7 @@ public class ReservationList {
 	
 	Reservation tempReservation = new Reservation(tempName, tempPhoneNumber, tempNoOfPeople, tempTableID, bookingTime.getTime());
 	reservation.add(tempReservation);
-	i=i+10;
+	i=i+11;
 	}
 
 	        br.close();
@@ -107,24 +105,6 @@ public class ReservationList {
 			System.out.println("Sorry. We can seat a maximum of 10 people");
 		}while(noOfPeople>10);
 		
-		//reading date and time
-		System.out.print("Year of reservation : ");
-		year = sc.nextInt();
-		System.out.print("Month of reservation: ");
-		month = sc.nextInt();
-		System.out.print("Date of reservation: ");
-		date = sc.nextInt();
-		System.out.print("Hour of reservation: ");
-		hour = sc.nextInt();
-		System.out.print("Minute of reservation: ");
-		minute = sc.nextInt();
-		
-		//saving date and time
-		bookingTime.set(Calendar.YEAR, year);
-		bookingTime.set(Calendar.MONTH, month-1);
-		bookingTime.set(Calendar.DAY_OF_MONTH, date);
-		bookingTime.set(Calendar.HOUR_OF_DAY, hour);
-		bookingTime.set(Calendar.MINUTE, minute);
 		
 		int tableID = tableList.getBestFitIndex(noOfPeople);
 		Reservation tempReservation = new Reservation(name, phoneNumber, noOfPeople, tableID, bookingTime.getTime());
@@ -164,11 +144,19 @@ public class ReservationList {
 	
 	public void reservationListOverwrite(){
         try{
-         out = new BufferedWriter(new FileWriter("memberlist.txt",false)); 
+        Calendar date = Calendar.getInstance();
+        int year, month, day, hour, minute;
+         out = new BufferedWriter(new FileWriter("reservationlist.txt",false)); 
          for(int counter=0;counter<reservation.size();counter++){
+        	 	date.setTime(reservation.get(counter).getDate());
+        	 	year = date.get(Calendar.YEAR);
+        	 	month = date.get(Calendar.MONTH);
+        	 	day = date.get(Calendar.DAY_OF_MONTH);
+        	 	hour = date.get(Calendar.HOUR);
+        	 	minute = date.get(Calendar.MINUTE);
         	 	out.write(reservation.get(counter).getName()+"\n"+	String.valueOf(reservation.get(counter).getPhoneNumber())+"\n"+	String.valueOf(reservation.get(counter).getNoOfPeople())+"\n"+
     		   	String.valueOf(reservation.get(counter).getTableId())+
-        "\n"+	reservation.get(counter).getDate());
+        "\n"+String.valueOf(year)+"\n"+String.valueOf(month)+"\n"+String.valueOf(day)+"\n"+String.valueOf(hour)+"\n"+String.valueOf(minute));
         	out.newLine();
 			out.newLine();
          }
@@ -180,6 +168,15 @@ public class ReservationList {
 
 }
 	
+	public void printReservation(){
+		for (int i=0; i<reservation.size(); i++){
+		 	 System.out.println("Reservation number: "+(i+1));
+		 	 reservation.get(i).print();
+		 	 System.out.println("\n");
+			}
+		  }
+		
+	}
 	
 	
-}
+	

@@ -57,7 +57,7 @@ public class MenuSet extends Item{
 				 input = sc.next();
 				 super.setDescription(input);
 				 System.out.print("Input set price : ");
-				 input=sc.nextLine(); //to catch the empty line
+				 //input=sc.nextLine(); //to catch the empty line
 				 price = sc.nextDouble();
 				 super.setPrice(price);
 				 System.out.println("Set creation successful");

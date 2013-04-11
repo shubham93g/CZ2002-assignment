@@ -23,34 +23,37 @@ public class PromoMenu{
         String tempName;
 		String tempDescription;
 		int tempID;
-		int tempCategory;
 		double tempPrice;
 		int tempMenuItemID;
         while(line != null) {
-            lines.add(line.replace("|", ""));
+            lines.add(line.replace("<", ""));
             line = br.readLine();
         }
         int i=0;
         
 while (i<lines.size()){
-	 tempID = Integer.parseInt(lines.get(i+1));
+	 tempID = Integer.parseInt(lines.get(i));
 	 MenuSet tempMenuSet = new MenuSet(menu,tempID);
-	 tempMenuSet.CreateMenuSet();
-	 promoMenu.add(tempMenuSet);
-	String[] strArray = lines.get(i).split(" | ");
-	for(int j = 0; j < strArray.length; j++) {
-	     tempMenuItemID= Integer.parseInt(strArray[j]);
-	     addMenuItem(tempID, tempMenuItemID);
-	}
-	
-
-
-
-tempName = lines.get(i+2);
-tempDescription = lines.get(i+3);
-tempPrice= Double.parseDouble(lines.get(i+4));
-i=i+5;
-}
+	 String menuIDwithCrap = lines.get(i+1);
+	 //int []menuItemID = new int[10];
+	 for(int k =0;k<menuIDwithCrap.length();k++){
+		 char c = menuIDwithCrap.charAt(k);
+		 if(Character.isDigit(c))
+			 tempMenuSet.addMenuItem(Character.getNumericValue(c));
+	 }
+	 //for(int j = 0; j < strArray.length; j++) {
+	 //    tempMenuItemID= Integer.parseInt(strArray[j]);
+	     //addMenuItem(tempID, tempMenuItemID);
+	  //   tempMenuSet.addMenuItem(tempMenuItemID);
+			tempName = lines.get(i+2);
+			tempDescription = lines.get(i+3);
+			tempPrice= Double.parseDouble(lines.get(i+4));
+			tempMenuSet.setName(tempName);
+			tempMenuSet.setDescription(tempDescription);
+			tempMenuSet.setPrice(tempPrice);
+			promoMenu.add(tempMenuSet);
+			i=i+6;
+			}
 	br.close();
 
 	}
@@ -181,14 +184,16 @@ i=i+5;
 	public void savePromoMenu(){
 	
  try{
- 
+	 		int id;
             out = new BufferedWriter(new FileWriter("promomenu.txt",false)); 
             for(int counter=0;counter<promoMenu.size();counter++){
 				{
 				out.write(promoMenu.get(counter).getID()+"\n");
            		for(int i=0; i<promoMenu.get(counter).getSetSize();i++){
-           		out.write(promoMenu.get(counter).getIDByIndex(i));
-           		out.write(" | ");
+           		id = promoMenu.get(counter).getIDByIndex(i);
+           		//System.out.print("Test id :" + id);
+           		out.write(String.valueOf(id));
+           		out.write("|");
            		}
            		//add in ID
            		out.write("\n"+promoMenu.get(counter).getName()+"\n"+promoMenu.get(counter).getDescription()+

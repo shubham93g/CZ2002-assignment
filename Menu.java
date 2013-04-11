@@ -28,8 +28,8 @@ try {
         String tempName;
 		String tempDescription;
 		int tempID;
-	int tempCategory;
-double tempPrice;
+		int tempCategory;
+		double tempPrice;
         while(line != null) {
             lines.add(line.replace(">", ""));
             line = br.readLine();
@@ -46,7 +46,7 @@ MenuItem newMenuItem = new MenuItem(tempID, tempName, tempCategory, tempDescript
 menu.add(newMenuItem);
 /*
 createMenuItem(tempName,tempDescription, tempPrice,tempCategory);*/
-i=i+5;
+i=i+6;
 }
 //menuOverwrite();
         
@@ -69,9 +69,6 @@ i=i+5;
   
   public void printMenu(){
 //first sort it according to category*/
-System.out.println("teststart");
-System.out.println(menu);
-System.out.println("testend");
 	  MenuItem[] menucopy = new MenuItem[menu.size()];
 	  System.arraycopy(menu.toArray(), 0, menucopy, 0, menu.size());
 	  int n = menucopy.length;

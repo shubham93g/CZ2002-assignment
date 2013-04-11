@@ -49,7 +49,7 @@ public class StaffList
 	tempAddress = lines.get(i+6);
 	Staff staff = new Staff(tempID, tempName, tempGender, tempJobTitle, tempEmailID, tempAddress, tempPhoneNumber);
 	 staff_list.add(staff);
-	i=i+7;
+	i=i+8;
 	}
 
 	        br.close();

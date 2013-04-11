@@ -47,7 +47,7 @@ public class MemberList
 	tempAddress = lines.get(i+4);
 	Member member = new Member(tempID, tempName, tempEmailID, tempPhoneNumber,tempAddress);
 	 member_list.add(member);
-	i=i+5;
+	i=i+6;
 	}
 
 	        br.close();

@@ -12,6 +12,7 @@ public static void main(String args[]){
 Menu m = new Menu();
 PromoMenu pm = new PromoMenu(m);
 TableList t = new TableList();
+ReservationList rl = new ReservationList(t);
 
 //initial menu
 Scanner sc = new Scanner(System.in);
@@ -49,15 +50,28 @@ case 3:
 //modify order of choice
 break;
 
-case 4:
+case 4:{
+	int reservChoice=0;
+	while (reservChoice<2){
+	System.out.println("1. Show reservations\n2. Back");
+	reservChoice = sc.nextInt();
+	
+	switch(reservChoice){
+	case 1:{
+		rl.printReservation();
+	}
+	default:
+			break;
+	}
+	
 //manage reservation
 //create
 //reservationlist
 //view reservations
 //remove based on name
-
+	}
 break;
-
+}
 //create, update & remove menu
 case 5:{
 int choice1=0;
@@ -177,7 +191,8 @@ System.out.println("What do you want to do:");
 System.out.println("1. Create promotion menu");
 System.out.println("2. Update promotion menu");
 System.out.println("3. Remove promotion menu");
-System.out.println("4. Back");
+System.out.println("4. View promotion menu");
+System.out.println("5. Back");
 choicePromo = sc.nextInt();
 
 switch(choicePromo){
@@ -247,6 +262,13 @@ choicePromoRemove=sc.nextInt();
 pm.removeSetByID(choicePromoRemove);
 break;
 }
+case 4:{
+System.out.println("PRINTING PROMOTIONAL MENU");
+	pm.printPromoMenu();
+	System.out.println("------------------------------");
+break;
+}
+	
 }
 }
 }
