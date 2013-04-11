@@ -1,12 +1,12 @@
 0
 Douglas Elmstedt
-douglas@elmstedt.com
 83162036
+douglas@elmstedt.com
 Jurong 123
 
 1
 Batman
-theBatMan@bats.com
 1234567
+theBatMan@bats.com
 BatCave 1
 

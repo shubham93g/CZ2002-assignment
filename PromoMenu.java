@@ -90,6 +90,7 @@ i=i+5;
 		 MenuSet tempMenuSet = new MenuSet(menu,iD);
 		 tempMenuSet.CreateMenuSet();
 		 promoMenu.add(tempMenuSet);
+		 savePromoMenu();
 		 
 	 }
 	 	 
@@ -125,23 +126,26 @@ i=i+5;
 	
 	public void updateSetPrice(int setID, double price){
 		int index = getSetIndexByID(setID);
-		if(index!=-1)
+		if(index!=-1){
 			promoMenu.get(index).setPrice(price);
+		savePromoMenu();}
 		else
 			System.out.println("Update failed. Set ID invalid.");
 			
 	}
 	public void updateSetName(int setID, String name){
 		int index = getSetIndexByID(setID);
-		if(index!=-1)
+		if(index!=-1){
 			promoMenu.get(index).setName(name);
+			savePromoMenu();}
 		else
 			System.out.println("Update failed. Set ID invalid.");
 	}
 	public void updateSetDescription(int setID, String description){
 		int index = getSetIndexByID(setID);
-		if(index!=-1)
+		if(index!=-1){
 			promoMenu.get(index).setDescription(description);
+		savePromoMenu();}
 		else
 			System.out.println("Update failed. Set ID invalid.");
 	}
@@ -157,16 +161,18 @@ i=i+5;
 	
 	public void updateSetItems(int setID){
 		int index = getSetIndexByID(setID);
-		if(index!=-1)
+		if(index!=-1){
 			promoMenu.get(index).updateMenuSet();
+		savePromoMenu();}
 		else
 			System.out.println("Update failed. Set ID invalid.");
 	}
 	
 	public void removeSetByID(int setID){
 		int index = getSetIndexByID(setID);
-		if(index!=-1)
+		if(index!=-1){
 			promoMenu.remove(index);
+		savePromoMenu();}
 		else
 			System.out.println("No such set exists");
 	}

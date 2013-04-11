@@ -148,8 +148,8 @@ public class MemberList
         try{
          out = new BufferedWriter(new FileWriter("memberlist.txt",false)); 
          for(int counter=0;counter<member_list.size();counter++){
-        	 	out.write(member_list.get(counter).getID()+"\n"+member_list.get(counter).getName()+"\n"+member_list.get(counter).getEmailID()+"\n"+
-    		   	String.valueOf(member_list.get(counter).getPhoneNumber())+
+        	 	out.write(member_list.get(counter).getID()+"\n"+member_list.get(counter).getName()+"\n"+String.valueOf(member_list.get(counter).getPhoneNumber())+"\n"+
+    		   	member_list.get(counter).getEmailID()+
         "\n"+member_list.get(counter).getAddress());
         	 out.newLine();
 			out.newLine();
