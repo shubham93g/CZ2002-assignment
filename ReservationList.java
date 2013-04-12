@@ -111,7 +111,7 @@ public class ReservationList {
 		hour  = sc.nextInt();
 		System.out.print("Minute of reservation : ");
 		minute  = sc.nextInt();
-		bookingTime.set(year, month, date, hour, minute);
+		bookingTime.set(year, month-1, date, hour, minute);
 		int tableID = tableList.getBestFitIndex(noOfPeople);
 		Reservation tempReservation = new Reservation(name, phoneNumber, noOfPeople, tableID, bookingTime.getTime());
 		reservation.add(tempReservation);
