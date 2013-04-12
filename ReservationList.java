@@ -116,6 +116,7 @@ public class ReservationList {
 		Reservation tempReservation = new Reservation(name, phoneNumber, noOfPeople, tableID, bookingTime.getTime());
 		reservation.add(tempReservation);
 		tableList.occupyTable(tableID);
+		reservationListOverwrite();
 	}
 	
 	public void checkPrintReservation(String name){

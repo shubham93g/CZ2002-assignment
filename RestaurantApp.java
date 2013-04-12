@@ -94,7 +94,11 @@ case 4:{
 		
 	break;}
 	case 3:{
-		rl.printReservation();
+		String name;
+		System.out.print("Input the name reservation was made by : ");
+		name = sc.next();
+		int index = rl.getIndexByName(name);
+		
 	}
 	default:
 			break;
