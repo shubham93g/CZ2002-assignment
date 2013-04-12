@@ -16,7 +16,7 @@ public class ReservationList {
 	   BufferedWriter out;
 	   BufferedReader in;
 	
-	public ReservationList(TableList taableList){
+	public ReservationList(TableList tableList){
 		reservation = new ArrayList<Reservation>();
 		this.tableList = tableList;
 		

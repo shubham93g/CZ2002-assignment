@@ -7,16 +7,16 @@ public class TableList {
 	public TableList(){
 		noOfTables = 10;
 		table = new Table[10];
-		table[0] = new Table(0,2);
-		table[1] = new Table(1,2);
+		table[0] = new Table(2,0);
+		table[1] = new Table(2,1);
 		table[2] = new Table(2,2);
-		table[3] = new Table(3,4);
+		table[3] = new Table(4,3);
 		table[4] = new Table(4,4);
-		table[5] = new Table(5,4);
+		table[5] = new Table(4,5);
 		table[6] = new Table(6,6);
-		table[7] = new Table(7,6);
-		table[8] = new Table(8,6);
-		table[9] = new Table(9,10);
+		table[7] = new Table(6,7);
+		table[8] = new Table(6,8);
+		table[9] = new Table(10,9);
 	}
 	
 	public int showEmpty(){
@@ -57,6 +57,7 @@ public class TableList {
 	
 	//returns index of table with best fit for the the noOfPeople booking
 	public int getBestFitIndex(int noOfPeople){
+		System.out.println("Funtion entered");
 		int tempTableID = -1;
 		if(showEmpty()==0) //if no tables are empty, return -1
 			return tempTableID;
