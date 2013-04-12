@@ -75,12 +75,25 @@ break;
 
 case 4:{
 	int reservChoice=0;
-	while (reservChoice<2){
-	System.out.println("1. Show reservations\n2. Back");
+	while (reservChoice<3){
+	System.out.println("1. Crete reservations\n2. Remove reservation\n3. View reservations\n4. Back");
 	reservChoice = sc.nextInt();
 	
 	switch(reservChoice){
+	
 	case 1:{
+		rl.createReservation();
+		
+		break;}
+	case 2:{
+		String rName;
+		System.out.println("---Remove reservation---");
+		System.out.println("Enter the name the resrvation is booked in: ");
+		rName=sc.next();
+		rl.removeReservation(rName);
+		
+	break;}
+	case 3:{
 		rl.printReservation();
 	}
 	default:

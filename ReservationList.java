@@ -29,9 +29,6 @@ public class ReservationList {
 	        List<String> lines = new ArrayList<String>();
 	        String line = br.readLine();
 	        String tempName;
-			int tempID;
-			String tempAddress;
-			String tempEmailID;
 			int tempPhoneNumber;
 			int tempNoOfPeople;
 			int tempTableID;
@@ -44,16 +41,16 @@ public class ReservationList {
 	        int i=0;
 	        
 	while (i<lines.size()){
-	tempName = lines.get(i+1);
-	tempPhoneNumber = Integer.parseInt(lines.get(i+2));
-	tempNoOfPeople= Integer.parseInt(lines.get(i+3));
-	tempTableID = Integer.parseInt(lines.get(i+4));
+	tempName = lines.get(i);
+	tempPhoneNumber = Integer.parseInt(lines.get(i+1));
+	tempNoOfPeople= Integer.parseInt(lines.get(i+2));
+	tempTableID = Integer.parseInt(lines.get(i+3));
 	
-	year = Integer.parseInt(lines.get(i+5));
-	month = Integer.parseInt(lines.get(i+6));
-	date = Integer.parseInt(lines.get(i+7));
-	hour = Integer.parseInt(lines.get(i+8));
-	minute = Integer.parseInt(lines.get(i+9));
+	year = Integer.parseInt(lines.get(i+4));
+	month = Integer.parseInt(lines.get(i+5));
+	date = Integer.parseInt(lines.get(i+6));
+	hour = Integer.parseInt(lines.get(i+7));
+	minute = Integer.parseInt(lines.get(i+8));
 	
 	bookingTime.set(Calendar.YEAR, year);
 	bookingTime.set(Calendar.MONTH, month-1);
@@ -63,7 +60,7 @@ public class ReservationList {
 	
 	Reservation tempReservation = new Reservation(tempName, tempPhoneNumber, tempNoOfPeople, tempTableID, bookingTime.getTime());
 	reservation.add(tempReservation);
-	i=i+11;
+	i=i+10;
 	}
 
 	        br.close();

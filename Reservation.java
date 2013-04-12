@@ -15,6 +15,7 @@ public class Reservation {
 		this.noOfPeople = noOfPeople;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
+		this.tableID = tableID;
 	}
 	
 
