@@ -19,7 +19,7 @@ public class Reservation {
 	}
 	
 
-	public Date getEndDate(){
+	public Date getEndDate(){				//stores startDate + 30 minutes
 		Calendar endDate = Calendar.getInstance();
 		endDate.setTime(startOfReservation);
 		int minute = endDate.get(Calendar.MINUTE);
