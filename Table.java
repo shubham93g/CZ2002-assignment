@@ -4,7 +4,7 @@ public class Table {
 	private int capacity;
 	private boolean isOccupied;
 	
-	public Table(int tableID, int capacity){
+	public Table(int capacity, int tableID){
 		isOccupied = false;
 		this.tableID = tableID;
 		this.capacity = capacity;
@@ -32,7 +32,7 @@ public class Table {
 	
 	public void print(){
 		System.out.println("Table ID : "+tableID);
-		System.out.println("Capacity : "+ tableID);
+		System.out.println("Capacity : "+ capacity);
 		if(isOccupied)
 			System.out.println("Status : Occupied");
 		else
