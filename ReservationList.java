@@ -101,8 +101,17 @@ public class ReservationList {
 		if(noOfPeople>10)
 			System.out.println("Sorry. We can seat a maximum of 10 people");
 		}while(noOfPeople>10);
-		
-		
+		System.out.print("Year of reservation : ");
+		year  = sc.nextInt();
+		System.out.print("Month of reservation : ");
+		month  = sc.nextInt();
+		System.out.print("Day of reservation : ");
+		date  = sc.nextInt();
+		System.out.print("Hour of reservation : ");
+		hour  = sc.nextInt();
+		System.out.print("Minute of reservation : ");
+		minute  = sc.nextInt();
+		bookingTime.set(year, month, date, hour, minute);
 		int tableID = tableList.getBestFitIndex(noOfPeople);
 		Reservation tempReservation = new Reservation(name, phoneNumber, noOfPeople, tableID, bookingTime.getTime());
 		reservation.add(tempReservation);
