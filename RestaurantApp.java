@@ -97,7 +97,7 @@ case 4:{
 		String name;
 		System.out.print("Input the name reservation was made by : ");
 		name = sc.next();
-		int index = rl.getIndexByName(name);
+		rl.checkPrintReservation(name);
 		
 	}
 	default:

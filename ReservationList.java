@@ -131,8 +131,9 @@ public class ReservationList {
 				System.out.println("Reservation is now invalid.\nRemoving reservation and vacating table.");
 				removeReservation(name);
 			}
-			else
+			else{
 				System.out.print("Reservation is still active");
+			}
 				
 		}
 		
