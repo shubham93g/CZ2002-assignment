@@ -5,8 +5,25 @@ douglas@elmstedt.com
 Jurong 123
 
 1
-Batman
+Bruce Wayne
 1234567
-theBatMan@bats.com
-BatCave 1
+Brucen@wayneenterprise.com
+Wayne Manor 1
+
+2
+Shubham Goyal
+82930412
+shubham@goyal.com
+NTU University 1
+
+3
+Sanchita Shandilya
+91203212
+sanchita@shandilya.com
+NTU University 2
+
+Clark Kent
+12325423
+clark@kent.com
+West Avenue 2
 

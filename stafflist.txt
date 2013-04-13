@@ -1,8 +1,32 @@
 0
-Ironman
+Gordon Ramsay
 M
 Owner
-12345323
-123@456.com
-Stark 1
+82153015
+gordon@ramsay.com
+20 Jurong West Street 43
+
+1
+Justin Tan
+M
+Chef
+90306040
+justin@tan.com
+12 Jurong East Street 23
+
+2
+Rachel Wang
+F
+Chef
+82153015
+gordon@ramsay.com
+20 Jurong West Street 43
+
+3
+Nic Yi
+M
+Waiter
+89230123
+nic@yi.com
+20 Boon Lay Way
 

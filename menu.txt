@@ -1,66 +1,84 @@
 0
-Soup
+Mushroom Soup
 1
-Very tasty and nice soup
-2.0
+A creamy and tasty soup made from wild mushrooms.
+8.0
 
 1
 Bread
 1
-Good fresh baked bread
+Fresh bread baked daily. Served with butter 
 3.0
 
 2
-Fresh bread
+Bruschetta 
 1
-fresh bread
-1.0
+Served with comfit tomatoes and stracciatella cheese
+8.0
 
 3
-Lobster
-2
-Try our expensive lobster
-20.0
-
-4
-Fish
-2
-Very tasty fish
+Mozzarella and tomato salad
+1
+Deliciously fresh tomatoes with our premium mozzarella cheese
 10.0
 
-5
-Corn
+4
+Oven-baked sea bass
 2
-Cheap good cup of corn
-5.0
+Served with fresh vegetables and potatoes
+18.0
+
+5
+Grilled Lobster
+2
+Served with fresh marinated vegetables and citrus salad
+32.0
 
 6
-beef
+Sliced beef sirlion grilled
 2
-nice b
-12.0
+Served with wild rocket salad, fontina cheese and artichoke sauce 
+24.0
 
 7
-Ice-Cream
-3
-chocolate ice-cream
-2.5
+Lasagne
+2
+Traditional oven-baked, served with aged parmesan cheese
+19.0
 
 8
-Test1
+Tiramisu
 3
-tesfds
-12.3
+Classic tiramisu, served with espresso coffe sauce
+11.5
 
 9
-asdas
-2
+Vanilla Panacotta
 3
-12.0
+Served with wild berries
+13.0
 
 10
-Chicken chop with Rice
-2
-	Delicious chicken chop with a hint of tangy sauce
-20.0
+Ice-cream
+3
+Classic chocolate and vanilla ice-cream
+9.5
+
+11
+Water
+4
+Fresh mineral water
+3.0
+
+12
+Sparkling water
+4
+Fresh sparkling mineral water
+4.0
+
+13
+House wine
+4
+Glass of house wine Chateau Margot 1995
+15.0
 
