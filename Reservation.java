@@ -8,7 +8,7 @@ public class Reservation {
 	private int noOfPeople;
 	private int tableID;
 	private String name; //key
-	private int phoneNumber; //key
+	private int phoneNumber;
 	
 	public Reservation(String name, int phoneNumber, int noOfPeople, int tableID, Date startDate){
 		startOfReservation = startDate;
@@ -18,8 +18,8 @@ public class Reservation {
 		this.tableID = tableID;
 	}
 	
-
-	public Date getEndDate(){				//stores startDate + 30 minutes
+	//stores startDate + 30 minutes
+	public Date getEndDate(){				
 		Calendar endDate = Calendar.getInstance();
 		endDate.setTime(startOfReservation);
 		int minute = endDate.get(Calendar.MINUTE);

@@ -12,10 +12,12 @@ import java.util.Scanner;
 
 public class ReservationList {
 	private ArrayList <Reservation> reservation;
-	private TableList tableList;
+	private TableList tableList; //needed to occupy table on creating and vacate table on cancellation/invalid reservation
 	   BufferedWriter out;
 	   BufferedReader in;
 	
+	//constructor
+	//also reads the reservation txt file to retrieve older reservations
 	public ReservationList(TableList tableList){
 		reservation = new ArrayList<Reservation>();
 		this.tableList = tableList;
@@ -59,8 +61,7 @@ public class ReservationList {
 	bookingTime.set(Calendar.MINUTE, minute);
 	Reservation tempReservation = new Reservation(tempName, tempPhoneNumber, tempNoOfPeople, tempTableID, bookingTime.getTime());
 	reservation.add(tempReservation);
-		tableList.occupyTable(tempReservation.getTableId());
-		System.out.println("\nTable "+ tempReservation.getTableId() + " is now occupied");
+	tableList.occupyTable(tempReservation.getTableId());
 	i=i+10;
 	}
 
@@ -77,6 +78,7 @@ public class ReservationList {
 		
 	}
 	
+	//function to return ArrayList index of given reservation name
 	public int getIndexByName(String name){
 		for(int i=0;i<reservation.size();i++)
 			if(reservation.get(i).getName().equalsIgnoreCase(name))
@@ -84,6 +86,7 @@ public class ReservationList {
 		return -1;
 	}
 	
+	//function to create a reservation
 	public void createReservation(){
 		Scanner sc = new Scanner(System.in);
 		String name;
@@ -116,12 +119,13 @@ public class ReservationList {
 		int tableID = tableList.getBestFit(noOfPeople);
 		Reservation tempReservation = new Reservation(name, phoneNumber, noOfPeople, tableID, bookingTime.getTime());
 		reservation.add(tempReservation);
-			tableList.occupyTable(tempReservation.getTableId());
-			System.out.println("\nTable "+ tempReservation.getTableId() + " is now occupied");
+		tableList.occupyTable(tempReservation.getTableId());
+		System.out.println("\nTable "+ tempReservation.getTableId() + " is now occupied");
 		
 		reservationListOverwrite();
 	}
 	
+	//function to check reservation with given name. If reservation is invalid, it is removed
 	public void checkPrintReservation(String name){
 		int index = getIndexByName(name);
 		Date currentDate = new Date();
@@ -145,6 +149,7 @@ public class ReservationList {
 		
 	}
 	
+	//function to remove reservation with given reservation name
 	public void removeReservation(String name){
 		int index = getIndexByName(name);
 		Date currentDate = new Date();
@@ -160,6 +165,7 @@ public class ReservationList {
 		}
 	}
 	
+	//function to write reservation to the txt file
 	public void reservationListOverwrite(){
         try{
         Calendar date = Calendar.getInstance();

@@ -23,6 +23,8 @@ public class OrderList {
 	BufferedWriter out;
 	BufferedReader in;
 	
+	//constructor
+	//also reads previous orders from the orderlist.txt
 	public OrderList(Menu menu, PromoMenu promoMenu, TableList tableList, StaffList staffList, MemberList memberList){
 		
 		this.menu = menu;
@@ -82,7 +84,7 @@ public class OrderList {
 				 String[] stringDate = lines.get(i+11).split("\\|");
 				 //format for date : year month day hour minute
 				 date.set(Integer.parseInt(stringDate[0]), 
-						 Integer.parseInt(stringDate[1]),Integer.parseInt(stringDate[2]), Integer.parseInt(stringDate[3]), Integer.parseInt(stringDate[4]));
+				 Integer.parseInt(stringDate[1]),Integer.parseInt(stringDate[2]), Integer.parseInt(stringDate[3]), Integer.parseInt(stringDate[4]));
 				 order =   new Order(orderID,0,0,staffID,tableID,pax,date.getTime(),isMember,active,price);
 				 for(int k =0;k<itemSize;k++){
 					 tempItemID=Integer.parseInt(itemID[k]);
@@ -112,6 +114,7 @@ public class OrderList {
 				activeOrders++;
 	}
 	
+	//function to write orders to orderlist.txt
 	public void orderOverWrite(){
         try{
          out = new BufferedWriter(new FileWriter("order.txt",false)); 
@@ -161,7 +164,7 @@ public class OrderList {
 
 }
 	
-	//function to check if an order with given ID exists  
+	//function to check if an order with given orderID exists  
 	public boolean checkOrderById(int id){
 		  for(int i=0;i<orders.size();i++)
 			  if(orders.get(i).getOrderID() == id)
@@ -186,24 +189,28 @@ public class OrderList {
 				  
 	  }
 	  
+	//function to return ArrayList index of given orderID
 	public int getIndexByID(int id){
 		  for(int i=0;i<orders.size();i++)
 			  if(orders.get(i).getOrderID() == id)
 				  return i;
 		  return -1; //if not found
 	  }
-	  
+	
+	//function to return the entire order with given orderID  
 	public Order getOrderByID(int id){
 		  for(int i=0;i<orders.size();i++)
 			  if(orders.get(i).getOrderID() == id)
 				  return orders.get(i);
 		  return null; //if not found
 	  }
-
+	
+	//function to return order with given index of the ArrayList
 	public Order getOrderByIndex(int index){
 		  return orders.get(index);
 	  }
 	  
+	//function to create a new order
 	public void create(){
 		//create order
 		Scanner sc = new Scanner(System.in);
@@ -217,6 +224,7 @@ public class OrderList {
 			if(!testBool)
 				System.out.println("Error : Input valid staffID");
 		}while(!testBool);
+		
 		do{
 			System.out.print("Input no of people : ");
 			pax = sc.nextInt();
@@ -272,6 +280,7 @@ public class OrderList {
 					else{ //if items were added
 						order.setTotalPrice(calculateSum(order));
 						orders.add(order);
+						//occupy table only when order has successfully been placed
 						tableList.occupyTable(tableID);
 						System.out.println("Order creation successful");
 						this.viewOrder(order);
@@ -286,6 +295,7 @@ public class OrderList {
 		}
 	}
 	
+	//function to update order with given orderID
 	public void update(int orderID){
 		//update order
 		int index = this.getIndexByID(orderID);
@@ -297,13 +307,13 @@ public class OrderList {
 			System.out.println("Error : Order has already completed");
 		else if(index==-1)
 			System.out.println("Error : Invalid order ID");
-		else{ //if order is active
+		else{ //if order is active and valid
 			viewOrder(order);
 			do{
 			System.out.println("\n1. Add Menu Item\n2. Add Menu Set\n3. Remove Menu Item\n4. Remove Menu Set\n5. Finish");
 			choice = sc.nextInt();
 			switch(choice){
-				case 1: //viewOrder(order);
+				case 1: 
 						System.out.print("Input item ID to add : ");
 						menuSelection  = sc.nextInt();
 						if(menu.checkMenuItem(menuSelection)){ //if item exists
@@ -317,7 +327,7 @@ public class OrderList {
 						sc.nextLine();
 						break;
 						
-				case 2: //this.viewOrder(order);
+				case 2: 
 						System.out.print("Input set ID to add : ");
 						menuSelection  = sc.nextInt();
 						if(promoMenu.getSetIndexByID(menuSelection)!=-1){ //if set exists
@@ -331,7 +341,7 @@ public class OrderList {
 						sc.nextLine();
 						break;
 						
-				case 3: //viewOrder(order);
+				case 3: 
 						System.out.print("Input item ID to remove : ");
 						menuSelection  = sc.nextInt();
 						if(order.checkItemByID(menuSelection)){ //if item exists
@@ -345,7 +355,7 @@ public class OrderList {
 						sc.nextLine();
 						break;
 						
-				case 4: //this.viewOrder(order);
+				case 4: 
 						System.out.print("Input set ID to remove : ");
 						menuSelection  = sc.nextInt();
 						if(order.checkSetByID(menuSelection)){ //if set exists
@@ -359,7 +369,7 @@ public class OrderList {
 						sc.nextLine();
 						break;
 		
-				case 5: if(order.getSetSize() ==0 && order.getItemSize()==0){
+				case 5: if(order.getSetSize() ==0 && order.getItemSize()==0){ //no items in order
 							System.out.println("\nError : Order is now empty. You have to add atleast 1 set or 1 item");
 							choice = 1;
 							sc.nextLine();
@@ -384,15 +394,20 @@ public class OrderList {
 		}
 	}
 	
+	//function to cancel order with given orderID
 	public void cancel(int orderID){
 		//remove order
 		int index;
 		Order order;
 		if(!this.checkOrderById(orderID))
 			System.out.println("Error : Invalid order ID");
-		else{
+		else{ //if order exists
 			index = this.getIndexByID(orderID);
 			order = orders.get(index);
+			if(!order.isActive()){
+				System.out.println("\nOrder has already been completed. Cannot cancel this order");
+				return;
+			}
 			this.viewOrder(order);
 			tableList.vacateTable(order.getTableID());
 			orders.remove(index);
@@ -403,6 +418,7 @@ public class OrderList {
 		
 	}
 
+	//function to calculate order's total price (excluding GST)
 	public double calculateSum(Order order){
 		//calculate total sum of order
 		double price = 0;
@@ -413,6 +429,7 @@ public class OrderList {
 		return price;
 	}
 	
+	//function to view order details
 	public void viewOrder(Order order){
 		//display order details
 		System.out.println(order.getDate().toString());
@@ -439,6 +456,7 @@ public class OrderList {
 		}
 	}
 	
+	//function to create invoice of given orderID
 	public void createInvoice(int orderID){
 		//create Invoice
 		int index = this.getIndexByID(orderID);

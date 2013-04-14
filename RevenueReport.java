@@ -16,7 +16,9 @@ public class RevenueReport {
 		endDate = new Date();
 		
 	}
-public void setPeriod() {
+	
+	//function to set the period to generate revenue report
+	public void setPeriod() {
 			int year_start,year_end,month_start,month_end,day_start,day_end, hour_start, hour_end;
 	    	Calendar start = Calendar.getInstance();
 	    	Calendar end = Calendar.getInstance();
@@ -45,28 +47,20 @@ public void setPeriod() {
             start.set(Calendar.DAY_OF_MONTH, day_start);
             start.set(Calendar.HOUR_OF_DAY, hour_start);
             start.set(Calendar.MINUTE, 0);
-            startDate = start.getTime();
+            startDate = start.getTime(); //return a date object
 
             end.set(Calendar.YEAR, year_end);
             end.set(Calendar.MONTH, month_end);
             end.set(Calendar.DAY_OF_MONTH, day_end);
             end.set(Calendar.HOUR_OF_DAY, hour_end);
             end.set(Calendar.MINUTE, 0);
-            endDate = end.getTime();
-		//set the period to generate revenue report
+            endDate = end.getTime(); //return a date object
+		
 	}
 	
 	
-	
+	//function to generate the report for the given period
 	public void generateReport(){
-		//generate the report
-		
-		//---------------need to add code to read orders from a file----------------------
-		// order must be inactive 
-		// order date must be between the period
-		// (order.isActive()==false)&&startDate.before(order.getDate())&&endDate.after(order.getDate())
-		// read order by order and insert in arrayList is above condition is true
-		
 		System.out.println("Start Date : "+startDate);
 		System.out.println("End Date : "+endDate);
 		Calendar testDate = Calendar.getInstance();
@@ -78,7 +72,6 @@ public void setPeriod() {
 		double price;
 		double memberPrice;
 		double totalPrice;
-		//midDate.set(Calendar.MONTH, midDate.get(Calendar.MONTH)+1);
 		while(testDate.before(endDate)){
 			orderSize = 0;
 			memberSize = 0;
@@ -91,7 +84,7 @@ public void setPeriod() {
 				tempDate.setTime(orders.getOrderByIndex(i).getDate());
 				if(tempDate.get(Calendar.MONTH)==testDate.get(Calendar.MONTH)&&tempDate.get(Calendar.YEAR)==testDate.get(Calendar.YEAR) && !orders.getOrderByIndex(i).isActive()){
 					orderSize++;
-					if(orders.getOrderByIndex(i).isMember()){
+					if(orders.getOrderByIndex(i).isMember()){ //if member
 						memberSize++;
 						memberPrice+= orders.getOrderByIndex(i).getTotalPrice()*0.9;
 						System.out.format("%n%28s %7d %8s %9.2f",
@@ -121,6 +114,7 @@ public void setPeriod() {
 		}
 	}
 	
+	//function to return the appropriate month string with given month number (by Date class)
 	public String monthDigitToString(int month){
 		switch(month){
 		case 0:return "Janurary";
