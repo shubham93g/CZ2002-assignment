@@ -58,24 +58,6 @@ Vanilla Panacotta
 Served with wild berries
 13.0
 
-11
-Curry Chicken
-1
-Singapore's delicacy, Curry Chicken with Rice
-10.0
-
-12
-Heineiken
-4
-Tasty alcoholic beverage
-5.0
-
-10
-Ice-cream
-3
-Classic chocolate and vanilla ice-cream
-9.5
-
 13
 Water
 4
@@ -93,4 +75,10 @@ House wine
 4
 Glass of house wine Chateau Margot 1995
 15.0
+
+12
+Beer
+4
+Tasty beer bottle
+22.0
 

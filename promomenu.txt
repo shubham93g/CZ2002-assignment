@@ -1,6 +1,6 @@
 0
 3
-2|7|8
+2|7|8|
 The italian special
 Enjoy a dinner meal with the wonderful tastes of italy
 35.9
@@ -13,16 +13,30 @@ A varied and delicious menu set
 45.0
 
 2
-3
-0|4|10
+4
+0|4|10|12|
 Fish menu set
 Starting with a creamy soup followed by a tasty fish and finishing with fresh ice-cream
 20.0
 
 3
 4
-0|10|7|12|
+0|7|10|12|
 Shubham's special
 A special set serving all courses of a meal.
 20.0
+
+4
+2
+12|13|
+Beer Water Combo
+Beer and water.
+10.0
+
+5
+1
+12|
+Test Set
+Test Description
+10.0
 

@@ -144,6 +144,7 @@ public class MenuSet extends Item{
 		  int temp;
 		  for(int i=0; i < n; i++){
 			  for(int j=1; j < (n-i); j++){
+				  if(menu.checkMenuItem(menuItemID[j-1])&&menu.checkMenuItem(menuItemID[j]))
 				  if(menu.getMenuItemById(menuItemID[j-1]).getCategory() > menu.getMenuItemById(menuItemID[j]).getCategory()){
 					  temp = menuItemID[j-1];
 					  menuItemID[j-1] = menuItemID[j];
@@ -154,6 +155,7 @@ public class MenuSet extends Item{
 		  //then print it
 		  System.out.format("%n%6s %-30s","ItemID", "Item name");
 			for (int i=0; i<n; i++){
+				if(menu.checkMenuItem(menuItemID[i]))
 			System.out.format("%n%6d %-30s",menu.getMenuItemById(menuItemID[i]).getID(), menu.getMenuItemById(menuItemID[i]).getName());
 			
 		  

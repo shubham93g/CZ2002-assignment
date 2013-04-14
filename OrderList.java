@@ -243,7 +243,7 @@ public class OrderList {
 		System.out.println("\n1. Add Menu Item\n2. Add Menu Set\n3. Finish");
 		choice = sc.nextInt();
 		switch(choice){
-			case 1: //menu.printMenu();
+			case 1: menu.printMenu();
 					System.out.print("Input Menu Item ID to add : ");
 					menuSelection = sc.nextInt();
 					if(menu.checkMenuItem(menuSelection)){ //if item exists
@@ -254,7 +254,7 @@ public class OrderList {
 					else //if item doesnt exist
 						System.out.println("Error : Input valid item ID");
 					break;
-			case 2: //menu.printMenu();
+			case 2: promoMenu.printPromoMenu();
 					System.out.print("Input Menu Set to add : ");
 					menuSelection = sc.nextInt();
 					if(promoMenu.getSetIndexByID(menuSelection)!=-1){ //if set exists

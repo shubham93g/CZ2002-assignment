@@ -55,6 +55,11 @@ Order order = ol.getOrderByID(orderID);
 if(ol.checkOrderById(orderID)){
 	System.out.println("Order Found\n");
 	ol.viewOrder(order);
+	if(order.isActive())
+		System.out.println("\nOrder is currently ACTIVE");
+	else
+		System.out.println("\n" +
+				"Order has been COMPLETED");
 }
 else
 	System.out.println("No such order found");
@@ -84,7 +89,7 @@ break;
 case 4:{
 	int reservChoice=0;
 	while (reservChoice<3){
-	System.out.println("1. Crete reservations\n2. Remove reservation\n3. View reservations\n4. Back");
+	System.out.println("1. Create reservations\n2. Remove reservation\n3. View reservations\n4. Back");
 	reservChoice = sc.nextInt();
 	
 	switch(reservChoice){
@@ -419,7 +424,7 @@ case 11:
 			System.out.print("Phone Number : ");
 			int phoneNumber = sc.nextInt();
 			ml.createMember(name, email, phoneNumber, address);
-			System.out.println("Staff creating successful");
+			System.out.println("Member created successful");
 			break;
 	case 2: System.out.print("\nInput member ID to remove");
 			int ID = sc.nextInt();

@@ -57,9 +57,10 @@ public class ReservationList {
 	bookingTime.set(Calendar.DAY_OF_MONTH, date);
 	bookingTime.set(Calendar.HOUR_OF_DAY, hour);
 	bookingTime.set(Calendar.MINUTE, minute);
-	
 	Reservation tempReservation = new Reservation(tempName, tempPhoneNumber, tempNoOfPeople, tempTableID, bookingTime.getTime());
 	reservation.add(tempReservation);
+		tableList.occupyTable(tempReservation.getTableId());
+		System.out.println("\nTable "+ tempReservation.getTableId() + " is now occupied");
 	i=i+10;
 	}
 
@@ -115,6 +116,9 @@ public class ReservationList {
 		int tableID = tableList.getBestFit(noOfPeople);
 		Reservation tempReservation = new Reservation(name, phoneNumber, noOfPeople, tableID, bookingTime.getTime());
 		reservation.add(tempReservation);
+			tableList.occupyTable(tempReservation.getTableId());
+			System.out.println("\nTable "+ tempReservation.getTableId() + " is now occupied");
+		
 		reservationListOverwrite();
 	}
 	
@@ -149,8 +153,10 @@ public class ReservationList {
 		else{
 			if(currentDate.after(reservation.get(index).getDate()) && currentDate.before(reservation.get(index).getEndDate()))
 				tableList.vacateTable(reservation.get(index).getTableId());
+			System.out.println("Reservation removed and table "+ reservation.get(index).getTableId() +" vacated");
 			reservation.remove(index);
-			System.out.println("Reservation removed");
+			reservationListOverwrite();
+
 		}
 	}
 	
