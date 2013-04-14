@@ -13,8 +13,10 @@ public class MenuSet extends Item{
 	  setSize = 0;
 	  super.setID(id);
 	  }
-
+	 
+	 //method to create a new menu set
 	 public void CreateMenuSet(){
+		 //prints the menu to facilitate adding an item (seeing the ids of all items)
 		 menu.printMenu();
 		 Scanner sc = new Scanner(System.in);
 		 int choice;
@@ -26,6 +28,7 @@ public class MenuSet extends Item{
 		 System.out.println("Select choice\n1. Add Menu Item\n2. Remove\n3. Finish");
 		 choice = sc.nextInt();
 		 switch(choice){
+		 //limit of 10 items in a menuset
 		 case 1:if(setSize==10){
 			 		System.out.println("Max items per set reached. Cannot add more items.");
 		 			break;
@@ -114,7 +117,7 @@ public class MenuSet extends Item{
 		 }while(choice!=3);
 
 	 }
-	 
+	 //adds a menuitem with itemID to the set
 	 public void addMenuItem(int itemID){
 		 if(setSize>=10)
 			 System.out.println("Cannot add more items to set");
@@ -123,14 +126,14 @@ public class MenuSet extends Item{
 		 setSize++;
 		 }
 	 }
-
+	 //check if the item with id exists in the set
 	 public boolean checkItemExistsInSet(int id){
 		 for(int i=0;i<setSize;i++)
 			 if(id==menuItemID[i])
 				 return true;
 		 return false;
 	 }
-
+	//gets the index for a specific menuitem id, if it exists
 	 public int getIndexById(int id){
 		 for(int i=0;i<setSize;i++)
 			 if(id==menuItemID[i])
@@ -138,6 +141,7 @@ public class MenuSet extends Item{
 		 return -1;
 	 }
 
+	 //prints the menuset
 	 public void printMenuSet(){
 		  //first sort it according to category
 		  int n = setSize;
@@ -157,26 +161,16 @@ public class MenuSet extends Item{
 			for (int i=0; i<n; i++){
 				if(menu.checkMenuItem(menuItemID[i]))
 			System.out.format("%n%6d %-30s",menu.getMenuItemById(menuItemID[i]).getID(), menu.getMenuItemById(menuItemID[i]).getName());
-			
-		  
-		  /*System.out.println("Name: "+getName());
-		  System.out.println("Price: "+getPrice());
-		  System.out.println("Description: "+getDescription());
-		  for (int i=0; i<n; i++){
-			  if (menu.getMenuItemById(menuItemID[i]).getCategory()!= 0)
-				  System.out.println(menu.getMenuItemById(menuItemID[i]).getName()+"\n"+menu.getMenuItemById(menuItemID[i]).getDescription()+"\n");
-		  */
-		 // System.out.println("---------------------------------------");
 		  }
 	 }
 	 
-
+	 //returns the menuitem ID for a specific index
 	 public int getIDByIndex(int index){
 		return menuItemID[index];
 	 }
 	 
 	 
-	 
+	 //returns size of the menuset
 	 public int getSetSize(){
 		 return setSize;
 	 }

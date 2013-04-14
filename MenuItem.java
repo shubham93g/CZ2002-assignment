@@ -1,23 +1,24 @@
 public class MenuItem extends Item{
-
+//the MenuClass will have the attributes of item and adding the category attribute
 	private int category;
 	
 	//constructor
 	public MenuItem(int itemID, String name, int category, String description, double price){
-	
-	super(itemID, name,description,price);
-	this.category = category;
-	
+		super(itemID, name,description,price);
+		this.category = category;
 	}
 	
+	//a simple get category which returns the category
 	public int getCategory(){
-	return category;
+		return category;
 	}
 	
+	//update the category to the input category
 	public void setCategory(int category_set){
-	category=category_set;
+		category=category_set;
 	}
 	
+	//prints the menuitem
 	public void printMenuItem(){
 		String pcategory;
 		if (category==1){
