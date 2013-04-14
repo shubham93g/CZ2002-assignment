@@ -147,7 +147,7 @@ public class StaffList
 	         out = new BufferedWriter(new FileWriter("stafflist.txt",false)); 
 	         for(int counter=0;counter<staff_list.size();counter++){
 	        	 	out.write(staff_list.get(counter).getID()+"\n"+staff_list.get(counter).getName()+"\n"+staff_list.get(counter).getGender()+"\n"+
-	    		   staff_list.get(counter).getJobTitle()+"\n+"+String.valueOf(staff_list.get(counter).getPhoneNumber())+
+	    		   staff_list.get(counter).getJobTitle()+"\n"+String.valueOf(staff_list.get(counter).getPhoneNumber())+
 	        "\n"+staff_list.get(counter).getEmailID()+"\n"+staff_list.get(counter).getAddress());
 	        	 out.newLine();
 				out.newLine();
