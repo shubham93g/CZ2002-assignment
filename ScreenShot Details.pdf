@@ -1,0 +1,45 @@
+1. introduction
+2. creating a staff
+3. print staff
+4. create a order with this staff (both items and sets) - invalid itemID
+5. check availability (to show that table is occupied)
+6. update the order
+7. print order invoice
+8. check availability of table (show empty table)
+9.  print menuSet
+10. update the menu (remove  item)
+11. print menuSet (with the removed item)
+12.   update menuSet (different set with a different item)
+13.(we get a call for a reservation....) create a reservation
+14.	show that table has been occupied
+15. (we got another call to remove this reservation) remove
+16.	show that table is no longer occupied
+17. create a new order - with new menuItems and menuSet
+18. the customer wants to be a member - create a member
+19.	print members
+20. print order invoice - indicate member ID to get discount
+21. create anther order
+22. check the order details
+23. cancel the order
+24. print the revenue report (to show that only 2 orders happened)
+25. show the file contents
+
+thing to add
+ - incorrect staffID input
+ - invalid no of people - screenshot 1
+ - invalid itemID - screenshot2
+ - order is empty - screenshot2
+  - order invoice - screenshot 3
+  - view order (order complete) - screenshot4
+  - generate invoice for completed order - screenshot 5
+  - updating a completed order - screenshot 6
+  - show menu - screenshot 7
+  - upate menu price - screenshot 8
+  - show menu with updated price - screenshot 9
+  - create promo<menu - sc10
+  - add item to menuSet - sc11
+  - set creation success - sc12
+  - view promoMenu (emphasise that the ID was auto generated)- sc13
+  - printStaff - sc14
+  
+ 
