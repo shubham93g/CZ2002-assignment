@@ -17,17 +17,12 @@ A varied and delicious menu set
 0|4|10
 Fish menu set
 Starting with a creamy soup followed by a tasty fish and finishing with fresh ice-cream
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+20.0
+
+3
 4
 0|10|7|12|
 Shubham's special
 A special set serving all courses of a meal.
-=======
->>>>>>> Changes
 20.0
 
-=======
-32.0
->>>>>>> udate promomenu
