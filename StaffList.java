@@ -9,13 +9,13 @@ import java.util.List;
 
 public class StaffList
 {
-   private ArrayList<Staff> staff_list;
+   private ArrayList<Staff> staff_list;							//ArrayList for dynamic memory allocation
    BufferedWriter out;
    BufferedReader in;
    
    public StaffList()
    {
-	   staff_list=new ArrayList <Staff>(); 
+	   staff_list=new ArrayList <Staff>(); 						//reading staff from text files
 	   try {
 			File file = new File("stafflist.txt");
 	        BufferedReader br = new BufferedReader(new FileReader(file));
@@ -60,7 +60,7 @@ public class StaffList
 
 		}
 	
-   public boolean checkStaff(int staff_employeeID){ //to check staff by staffID
+   public boolean checkStaff(int staff_employeeID){ //to check staff by staffID			
 		for (int i=0; i<staff_list.size(); i++)
 			if (staff_employeeID==staff_list.get(i).getID()){
 				return true;
@@ -68,7 +68,7 @@ public class StaffList
 		return false;
 	    }
    
-   public int generateID(){
+   public int generateID(){//randomly generate staffID
 		  for(int i=0;i<staff_list.size();i++) //check if there are any staff with missing IDs (as compared to index)
 			  if(!checkStaff(i))	//if yes, return this missing ID
 				  return i;
@@ -112,7 +112,7 @@ public class StaffList
 	    }
 	 }
 	  
-	 public void sortStaff(){
+	 public void sortStaff(){//sort and print staff by staffID
 		Staff temporaryStaff; //used for array operations
 		Staff [] staffCopy = new Staff[100];
 		System.arraycopy(staff_list.toArray(), 0, staffCopy, 0, staff_list.size());
@@ -146,7 +146,7 @@ public class StaffList
 			 System.out.println("Staff with ID does not exist");
 	 }
 	 
-	 public void staffListOverwrite(){
+	 public void staffListOverwrite(){//update the changes back in the text file
 	        try{
 	         out = new BufferedWriter(new FileWriter("stafflist.txt",false)); 
 	         for(int counter=0;counter<staff_list.size();counter++){

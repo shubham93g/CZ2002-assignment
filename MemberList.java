@@ -10,12 +10,12 @@ import java.util.List;
 public class MemberList
 {
 	
-   private ArrayList<Member> member_list;
+   private ArrayList<Member> member_list;//for dynamic memory allocation
    BufferedWriter out;
    BufferedReader in;
    
    
-   public MemberList(){
+   public MemberList(){//reading member from text files
 	   
 	   
 	   member_list = new ArrayList<Member>();
@@ -118,7 +118,7 @@ public class MemberList
 	         memberListOverwrite();
 	     }
 	  
-	 public void sortMembers(){
+	 public void sortMembers(){//sort and print members by memberID
 		Member temporaryMember; //used for array operations
 		Member [] memberCopy = new Member[member_list.size()];
 		System.arraycopy(member_list.toArray(), 0, memberCopy, 0, member_list.size());
@@ -152,7 +152,7 @@ public class MemberList
 			 System.out.println("Staff with ID does not exist");
 	 }
 	
-	public void memberListOverwrite(){
+	public void memberListOverwrite(){//update changes back into the text file
         try{
          out = new BufferedWriter(new FileWriter("memberlist.txt",false)); 
          for(int counter=0;counter<member_list.size();counter++){
