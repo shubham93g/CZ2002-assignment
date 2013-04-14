@@ -76,7 +76,9 @@ public class MemberList
 				  if(!checkMember(i))	//if yes, return this missing ID
 					  return i;
 			  
-			  int lastID = member_list.get(member_list.size()-1).getID(); //otherwise, get the last used ID
+			  int lastID = 0;
+			  if(member_list.size()!=0)
+				  lastID = member_list.get(member_list.size()-1).getID(); //otherwise, get the last used ID
 			  while(checkMember(lastID)) //increment it till you get a new, unused ID
 				  lastID++;
 			  return lastID; //return this newID
@@ -138,6 +140,17 @@ public class MemberList
 	    for (int i=0; i<member_list.size(); i++)
 	    		System.out.println("Name: "+member_list.get(i).getName()+" Member ID: "+member_list.get(i).getID());
 	    }
+	
+	public void removeMemberByID(int ID){
+		 int index = this.getMemberIndex(ID);
+		 if(index!=-1){
+			 member_list.remove(index);
+			 System.out.print("\nStaff removed");
+			 memberListOverwrite();
+		 }
+		 else
+			 System.out.println("Staff with ID does not exist");
+	 }
 	
 	public void memberListOverwrite(){
         try{

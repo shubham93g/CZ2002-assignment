@@ -68,36 +68,29 @@ Singapore's delicacy, Curry Chicken with Rice
 Heineiken
 4
 Tasty alcoholic beverage
-0.1
+5.0
 
 10
-<<<<<<< HEAD
 Ice-cream
 3
 Classic chocolate and vanilla ice-cream
 9.5
 
-11
+13
 Water
 4
 Fresh mineral water
 3.0
 
-12
+14
 Sparkling water
 4
 Fresh sparkling mineral water
 4.0
 
-13
+15
 House wine
 4
 Glass of house wine Chateau Margot 1995
 15.0
-=======
-Korean Ramen
-2
-Korean Ramen
-12.0
->>>>>>> Majot changes (in all files )
 

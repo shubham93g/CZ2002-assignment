@@ -1,5 +1,4 @@
 0
-<<<<<<< HEAD
 3
 2|7|8
 The italian special
@@ -19,13 +18,15 @@ A varied and delicious menu set
 Fish menu set
 Starting with a creamy soup followed by a tasty fish and finishing with fresh ice-cream
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 4
 0|10|7|12|
 Shubham's special
 A special set serving all courses of a meal.
+=======
+>>>>>>> Changes
 20.0
->>>>>>> Majot changes (in all files )
 
 =======
 32.0

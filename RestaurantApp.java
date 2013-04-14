@@ -20,7 +20,7 @@ Scanner sc = new Scanner(System.in);
 int choice=0,orderID;
 System.out.println("Restaurant Reservation & Point Sale System");
 System.out.println("Developed by Douglas, Sanchita & Shubham");
-while (choice<11){
+while (choice<12){
 System.out.println("\nPress enter to continue");
 sc.nextLine();
 System.out.println("Make your choice (1-10):");
@@ -360,10 +360,7 @@ case 5:{
 	case 9: rr.setPeriod();
 			rr.generateReport();
 			sc.nextLine();
-//invoice
-//enter start date and end date
-//read from .txt file and save the relevant data into arraylist 
-//print the data read
+//revenue report
 break;
 
 
@@ -406,13 +403,41 @@ case 10: int userChoice;
 	
 	//members
 case 11:
-	System.out.println("----PRINTING ALL MEMBERS----");
-	ml.printAllMembers();
+	int userChoice2;
+	do{
+	System.out.println("\nInput your choice\n1. Add new member\n2. Remove member\n3. View member\n4. Back\n");
+	userChoice2 = sc.nextInt();
+	switch(userChoice2){
+	case 1: System.out.print("\nInput the following details\nMember name: ");
+			sc.nextLine();
+			String name = sc.nextLine();
+			System.out.print("Email : ");
+			String email = sc.next();
+			System.out.print("Address : ");
+			sc.nextLine();
+			String address = sc.nextLine();
+			System.out.print("Phone Number : ");
+			int phoneNumber = sc.nextInt();
+			ml.createMember(name, email, phoneNumber, address);
+			System.out.println("Staff creating successful");
+			break;
+	case 2: System.out.print("\nInput member ID to remove");
+			int ID = sc.nextInt();
+			ml.removeMemberByID(ID);
+			break;
+	case 3:	System.out.println("----PRINTING MEMBER-----");
+			ml.printAllMembers();
+			break;
+	case 4: break;
+	default:break;
+	}
+	}while(userChoice2!=4);
+	//
+	sc.nextLine();
 	break;
 
 
-default:
-break;
+default:break;
 
 }
 }

@@ -150,13 +150,11 @@ public class StaffList
 	        try{
 	         out = new BufferedWriter(new FileWriter("stafflist.txt",false)); 
 	         for(int counter=0;counter<staff_list.size();counter++){
-<<<<<<< HEAD
 	        	 	out.write(staff_list.get(counter).getID()+"\n"+staff_list.get(counter).getName()+"\n"+staff_list.get(counter).getGender()+"\n"+
 	    		   staff_list.get(counter).getJobTitle()+"\n"+String.valueOf(staff_list.get(counter).getPhoneNumber())+
 	        "\n"+staff_list.get(counter).getEmailID()+"\n"+staff_list.get(counter).getAddress());
 	        	 out.newLine();
 				out.newLine();
-=======
 	        	 	out.write(String.valueOf(staff_list.get(counter).getID())+"\n"+
 	        	 			staff_list.get(counter).getName()+"\n"+
 	        	 			staff_list.get(counter).getGender()+"\n"+
@@ -166,7 +164,6 @@ public class StaffList
 	        	 			staff_list.get(counter).getAddress());
 	        	 			out.newLine();
 	        	 			out.newLine();
->>>>>>> Majot changes (in all files )
 	         }
 	         out.close();
 	         }
