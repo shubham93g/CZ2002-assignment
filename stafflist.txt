@@ -1,4 +1,5 @@
 0
+<<<<<<< HEAD
 Gordon Ramsay
 M
 Owner
@@ -29,4 +30,12 @@ Waiter
 89230123
 nic@yi.com
 20 Boon Lay Way
+=======
+Shubham
+m
+321
+321
+321
+321
+>>>>>>> Majot changes (in all files )
 

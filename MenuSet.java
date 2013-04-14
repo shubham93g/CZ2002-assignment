@@ -34,7 +34,7 @@ public class MenuSet extends Item{
 		 		userInput = sc.nextInt();
 		 		if(menu.checkMenuItem(userInput)){
 		 			addMenuItem(userInput);
-		 			System.out.println("Item added to set");
+		 			System.out.println( menu.getMenuItemById(userInput).getName()+" added to set");
 		 		}
 		 		else
 		 			System.out.println("No such item exists in menu");
@@ -43,6 +43,7 @@ public class MenuSet extends Item{
 	 			userInput = sc.nextInt();
 	 			index = getIndexById(userInput);
 	 			if(index!=-1){
+	 				System.out.println( menu.getMenuItemById(userInput).getName()+" removed from set");
 	 				for(int j = index+1; j<setSize;j++)
 	 					menuItemID[j-1] = menuItemID[j];
 	 				setSize--;
@@ -51,10 +52,11 @@ public class MenuSet extends Item{
 	 				System.out.println("No such item exists in set");
 	 			break;
 		 case 3:System.out.print("Input set name : ");
-				 input = sc.next();
+				 input = sc.nextLine();
+				 input = sc.nextLine();
 				 super.setName(input);
 				 System.out.print("Input set description : ");
-				 input = sc.next();
+				 input = sc.nextLine();
 				 super.setDescription(input);
 				 System.out.print("Input set price : ");
 				 //input=sc.nextLine(); //to catch the empty line
@@ -77,7 +79,7 @@ public class MenuSet extends Item{
 		 int userInput;
 		 int index;
 		 do{
-		 System.out.println("Select choice\n1. Add Menu Item\n2. Remove\n3. Finish");
+		 System.out.println("\nSelect choice\n1. Add Menu Item\n2. Remove\n3. Finish");
 		 choice = sc.nextInt();
 		 switch(choice){
 		 case 1:if(setSize>=10){
@@ -88,7 +90,7 @@ public class MenuSet extends Item{
 		 		userInput = sc.nextInt();
 		 		if(menu.checkMenuItem(userInput)){
 		 			addMenuItem(userInput);
-		 			System.out.println("Item added to set");
+		 			System.out.println( menu.getMenuItemById(userInput).getName()+" added to set");
 		 		}
 		 		else
 		 			System.out.println("No such item exists in menu");
@@ -97,6 +99,7 @@ public class MenuSet extends Item{
 	 			userInput = sc.nextInt();
 	 			index = getIndexById(userInput);
 	 			if(index!=-1){ //if item exists in set
+	 				System.out.println( menu.getMenuItemById(userInput).getName()+" removed from set");
 	 				for(int j = index+1; j<setSize;j++)
 	 					menuItemID[j-1] = menuItemID[j];
 	 				setSize--;
@@ -149,13 +152,19 @@ public class MenuSet extends Item{
 				  }
 			  }
 		  //then print it
-		  System.out.println("Name: "+getName());
+		  System.out.format("%n%6s %-30s","ItemID", "Item name");
+			for (int i=0; i<n; i++){
+			System.out.format("%n%6d %-30s",menu.getMenuItemById(menuItemID[i]).getID(), menu.getMenuItemById(menuItemID[i]).getName());
+			
+		  
+		  /*System.out.println("Name: "+getName());
 		  System.out.println("Price: "+getPrice());
 		  System.out.println("Description: "+getDescription());
 		  for (int i=0; i<n; i++){
 			  if (menu.getMenuItemById(menuItemID[i]).getCategory()!= 0)
 				  System.out.println(menu.getMenuItemById(menuItemID[i]).getName()+"\n"+menu.getMenuItemById(menuItemID[i]).getDescription()+"\n");
-		  System.out.println("---------------------------------------");
+		  */
+		 // System.out.println("---------------------------------------");
 		  }
 	 }
 	 

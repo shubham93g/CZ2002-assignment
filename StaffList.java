@@ -5,12 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
-import java.util.Calendar;
-import java.util.Date;
 
 public class StaffList
 {
@@ -28,7 +23,7 @@ public class StaffList
 	        String line = br.readLine();
 	        String tempName;
 			int tempID;
-			char tempGender;
+			String tempGender;
 			String tempJobTitle;
 			String tempAddress;
 			String tempEmailID;
@@ -40,15 +35,16 @@ public class StaffList
 	        int i=0;
 	        
 	while (i<lines.size()){
+
 	tempID = Integer.parseInt(lines.get(i));
 	tempName = lines.get(i+1);
-	tempGender = lines.get(i+2).charAt(0);
+	tempGender = lines.get(i+2);
 	tempJobTitle = lines.get(i+3);
 	tempPhoneNumber = Integer.parseInt(lines.get(i+4));
 	tempEmailID = lines.get(i+5);
 	tempAddress = lines.get(i+6);
-	Staff staff = new Staff(tempID, tempName, tempGender, tempJobTitle, tempEmailID, tempAddress, tempPhoneNumber);
-	 staff_list.add(staff);
+	Staff staff = new Staff(tempID, tempName, tempGender.charAt(0), tempJobTitle, tempEmailID, tempAddress, tempPhoneNumber);
+	staff_list.add(staff);
 	i=i+8;
 	}
 
@@ -59,14 +55,10 @@ public class StaffList
 	             System.out.println("There was a problem:" + e);
 	         }
 	 			catch (NumberFormatException e) {
-	           //System.out.println("This is not a number");
-	       }
+	 				e.printStackTrace();
+	 			}
 
 		}
-	   
-	   //How to determine the length of this array?
-	   //---------------need to add code to read members from a file----------------------
-
 	
    public boolean checkStaff(int staff_employeeID){ //to check staff by staffID
 		for (int i=0; i<staff_list.size(); i++)
@@ -80,8 +72,9 @@ public class StaffList
 		  for(int i=0;i<staff_list.size();i++) //check if there are any staff with missing IDs (as compared to index)
 			  if(!checkStaff(i))	//if yes, return this missing ID
 				  return i;
-		  
-		  int lastID = staff_list.get(staff_list.size()-1).getID(); //otherwise, get the last used ID
+		  int lastID = 0;
+		  if(staff_list.size()!=0)
+			  lastID = staff_list.get(staff_list.size()-1).getID(); //otherwise, get the last used ID 
 		  while(checkStaff(lastID)) //increment it till you get a new, unused ID
 			  lastID++;
 		  return lastID; //return this newID
@@ -139,18 +132,41 @@ public class StaffList
 	 public void printAllStaff(){
 		 System.out.println ("The following is the list of staff and their employee IDs: ");
 		 for (int i=0; i<staff_list.size(); i++)
-	        System.out.println("Name: "+staff_list.get(i).getName()+" Member ID: "+staff_list.get(i).getID());
+	        System.out.println("Name: "+staff_list.get(i).getName()+" Staff ID: "+staff_list.get(i).getID());
 	    }
+	 
+	 public void removeStaffByID(int ID){
+		 int index = this.getStaffIndex(ID);
+		 if(index!=-1){
+			 staff_list.remove(index);
+			 System.out.print("\nStaff removed");
+			 staffListOverwrite();
+		 }
+		 else
+			 System.out.println("Staff with ID does not exist");
+	 }
 	 
 	 public void staffListOverwrite(){
 	        try{
 	         out = new BufferedWriter(new FileWriter("stafflist.txt",false)); 
 	         for(int counter=0;counter<staff_list.size();counter++){
+<<<<<<< HEAD
 	        	 	out.write(staff_list.get(counter).getID()+"\n"+staff_list.get(counter).getName()+"\n"+staff_list.get(counter).getGender()+"\n"+
 	    		   staff_list.get(counter).getJobTitle()+"\n"+String.valueOf(staff_list.get(counter).getPhoneNumber())+
 	        "\n"+staff_list.get(counter).getEmailID()+"\n"+staff_list.get(counter).getAddress());
 	        	 out.newLine();
 				out.newLine();
+=======
+	        	 	out.write(String.valueOf(staff_list.get(counter).getID())+"\n"+
+	        	 			staff_list.get(counter).getName()+"\n"+
+	        	 			staff_list.get(counter).getGender()+"\n"+
+	        	 			staff_list.get(counter).getJobTitle()+"\n"+
+	        	 			String.valueOf(staff_list.get(counter).getPhoneNumber())+"\n"+
+	        	 			staff_list.get(counter).getEmailID()+"\n"+
+	        	 			staff_list.get(counter).getAddress());
+	        	 			out.newLine();
+	        	 			out.newLine();
+>>>>>>> Majot changes (in all files )
 	         }
 	         out.close();
 	         }

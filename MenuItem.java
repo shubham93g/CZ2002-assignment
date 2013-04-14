@@ -20,22 +20,22 @@ public class MenuItem extends Item{
 	
 	public void printMenuItem(){
 		String pcategory;
-		if (category=='1'){
+		if (category==1){
 			pcategory="Starter";
 		}
-		else if (category=='2'){
+		else if (category==2){
 			pcategory="Main";
 		}
-		else if (category=='3'){
+		else if (category==3){
 			pcategory="Dessert";
 		}
-		else if (category =='4')
+		else if (category ==4)
 			pcategory="Drink";
 		else{
 			pcategory="Not specified";
 		}
-		System.out.println("ItemID: "+ getID());
 		System.out.println("Name: "+getName());
+		System.out.println("ItemID: "+ getID());
 		System.out.println("Category: "+pcategory);
 		System.out.println("Description: "+getDescription());
 		System.out.println("Price: "+ getPrice());

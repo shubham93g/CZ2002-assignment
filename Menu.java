@@ -1,9 +1,10 @@
-import java.util.ArrayList;
-import java.io.*;
-import java.util.*;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Menu{
@@ -89,20 +90,21 @@ i=i+6;
       //then print it
     String pcategory=null;
     System.out.println("--------MENU---------");
+	System.out.format("%n%8s %6s %30s %9s %s%n", "Category", "ItemID", "Name", "Price", "Description");
 	for (int i=0; i<n; i++){
-	if (menucopy[i].getCategory()==1)
-	{pcategory="Starter";
+	switch(menucopy[i].getCategory()){
+		case 1: pcategory = "Starter";
+				break;
+		case 2: pcategory = "Main";
+				break;
+		case 3: pcategory = "Dessert";
+				break;
+		case 4: pcategory = "Drink";
+				break;
 	}
-	else if (menucopy[i].getCategory()==2){
-	pcategory="Main";
-	}
-	else if (menucopy[i].getCategory()==3){
-	pcategory="Dessert";
-	}
-
-	if (menucopy[i].getCategory() != 0)
-	System.out.println(pcategory+" with itemID: "+menucopy[i].getID()+" \n"+menucopy[i].getName()+"\n"+menucopy[i].getDescription()+"\n"+menucopy[i].getPrice()+" SGD");
-   	System.out.println("---------------------------\n");
+	System.out.format("%8s %6d %30s %4s%5.2f %s%n", pcategory,menucopy[i].getID(), menucopy[i].getName(), "SGD ", menucopy[i].getPrice(), menucopy[i].getDescription());
+	//System.out.println(pcategory+" with itemID: "+menucopy[i].getID()+" \n"+menucopy[i].getName()+"\n"+menucopy[i].getDescription()+"\n"+menucopy[i].getPrice()+" SGD");
+   	//System.out.println("---------------------------\n");
  }
 			
 	}		
@@ -241,11 +243,8 @@ public void menuOverwrite(){
 }
 
 
-public MenuItem getMenuItem(int itemID){
-	for(int i=0;i<menu.size();i++)
-		if(menu.get(i).getID()==itemID)
-			return menu.get(i);
-	return null;
+public MenuItem getMenuItemByIndex(int index){
+			return menu.get(index);
 }
 public ArrayList<MenuItem> getMenu(){
 return menu;

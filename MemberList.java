@@ -1,12 +1,10 @@
-import java.util.ArrayList;
-import java.io.*;
-import java.util.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MemberList
@@ -61,10 +59,7 @@ public class MemberList
 	       }
 
 		}
-	   
-	   
- //---------------need to replace above code with reading of members from a file----------------------
-	  
+	   	  
    
 	public boolean checkMember(int member_memberID){ 
 		//to check membership by memberID; 

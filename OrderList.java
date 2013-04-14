@@ -33,7 +33,7 @@ public class OrderList {
 		orders = new ArrayList <Order>();
 		activeOrders = 0;
 		
-//---------------need to add code to read orders from a file----------------------
+		//initializing the file at the beginning of the program
 		try {
 			File file = new File("order.txt");
 	        BufferedReader br = new BufferedReader(new FileReader(file));
@@ -93,6 +93,8 @@ public class OrderList {
 					 order.addMenuSet(tempSetID);
 				 	}
 				 orders.add(order);
+				 if(order.isActive())
+				 	tableList.occupyTable(tableID);
 				 i+=13;
 			}
 				br.close();
@@ -159,16 +161,16 @@ public class OrderList {
 
 }
 	
-	  //function to check if an order with given ID exists  
-	  public boolean checkOrderById(int id){
+	//function to check if an order with given ID exists  
+	public boolean checkOrderById(int id){
 		  for(int i=0;i<orders.size();i++)
 			  if(orders.get(i).getOrderID() == id)
 				  return true;
 		  return false;
 	  }
 	  
-	  //function to auto generate orderID
-	  public int generateID(){
+	//function to auto generate orderID
+	public int generateID(){
 		  int lastID;
 		  for(int i=0;i<orders.size();i++) //check if there are any orders with missing IDs (as compared to index)
 			  if(!checkOrderById(i))	//if yes, return this missing ID
@@ -184,21 +186,21 @@ public class OrderList {
 				  
 	  }
 	  
-	  public int getIndexByID(int id){
+	public int getIndexByID(int id){
 		  for(int i=0;i<orders.size();i++)
 			  if(orders.get(i).getOrderID() == id)
 				  return i;
 		  return -1; //if not found
 	  }
 	  
-	  public Order getOrderByID(int id){
+	public Order getOrderByID(int id){
 		  for(int i=0;i<orders.size();i++)
 			  if(orders.get(i).getOrderID() == id)
 				  return orders.get(i);
 		  return null; //if not found
 	  }
 
-	  public Order getOrderByIndex(int index){
+	public Order getOrderByIndex(int index){
 		  return orders.get(index);
 	  }
 	  
@@ -220,13 +222,15 @@ public class OrderList {
 			pax = sc.nextInt();
 			if(pax>10)
 				System.out.println("Sorry. We can seat a maximum of 10 people");
-		}while(pax>10);
+			else if(pax<=0)
+				System.out.println("Please input a valid number");
+		}while(pax>10 || pax<=0);
 		
-		tableID  = tableList.getBestFitIndex(pax);
+		tableID  = tableList.getBestFitEmptyIndex(pax);
 		if(tableID==-1)
 			System.out.println("Sorry. We are completely occupied at the moment. Please wait for 15 minutes");
 		else{
-		System.out.print("Table " + tableID + " has been assigned to this order");
+		System.out.print("Table " + tableID + " with capacity "+tableList.getTable(tableID).getCapacity() + " assigned");
 		
 		int choice; //for user choice
 		int menuSelection; //for selection on user menu input
@@ -236,7 +240,7 @@ public class OrderList {
 		Order order = new Order(orderID,itemSize,setSize,staffID,tableID,pax);
 		
 		do{	
-		System.out.println("1. Add Menu Item\n2. Add Menu Set\n3. Finish");
+		System.out.println("\n1. Add Menu Item\n2. Add Menu Set\n3. Finish");
 		choice = sc.nextInt();
 		switch(choice){
 			case 1: //menu.printMenu();
@@ -245,7 +249,7 @@ public class OrderList {
 					if(menu.checkMenuItem(menuSelection)){ //if item exists
 						order.addMenuItem(menuSelection);
 						itemSize++;
-					System.out.println(menu.getMenuItem(menuSelection).getName() +" added");
+					System.out.println(menu.getMenuItemById(menuSelection).getName() +" added");
 					}
 					else //if item doesnt exist
 						System.out.println("Error : Input valid item ID");
@@ -265,7 +269,7 @@ public class OrderList {
 						System.out.println("Error : Order is empty. Please add items before finishing");
 						choice = 1; //to prevent the loop from ending
 					}
-					else{
+					else{ //if items were added
 						order.setTotalPrice(calculateSum(order));
 						orders.add(order);
 						tableList.occupyTable(tableID);
@@ -294,22 +298,26 @@ public class OrderList {
 		else if(index==-1)
 			System.out.println("Error : Invalid order ID");
 		else{ //if order is active
+			viewOrder(order);
 			do{
-			System.out.println("1. Add Menu Item\n2.Add Menu Set\n3.Remove Menu Item\n4. Remove Menu Set\n5. Finish");
+			System.out.println("\n1. Add Menu Item\n2. Add Menu Set\n3. Remove Menu Item\n4. Remove Menu Set\n5. Finish");
 			choice = sc.nextInt();
 			switch(choice){
-				case 1: viewOrder(order);
+				case 1: //viewOrder(order);
 						System.out.print("Input item ID to add : ");
 						menuSelection  = sc.nextInt();
 						if(menu.checkMenuItem(menuSelection)){ //if item exists
 							order.addMenuItem(menuSelection);
-							System.out.println(menu.getMenuItem(menuSelection).getName() +" added");
+							System.out.println(menu.getMenuItemById(menuSelection).getName() +" added");
 						}
 						else //if item doesnt exist
 							System.out.println("Error : Input valid item ID");
+						sc.nextLine();
+						System.out.println("\nPress enter to continue");
+						sc.nextLine();
 						break;
 						
-				case 2: this.viewOrder(order);
+				case 2: //this.viewOrder(order);
 						System.out.print("Input set ID to add : ");
 						menuSelection  = sc.nextInt();
 						if(promoMenu.getSetIndexByID(menuSelection)!=-1){ //if set exists
@@ -318,20 +326,26 @@ public class OrderList {
 						}
 						else //if set doesnt exist
 							System.out.println("Error : Input valid set ID");
+						sc.nextLine();
+						System.out.println("\nPress enter to continue");
+						sc.nextLine();
 						break;
 						
-				case 3: viewOrder(order);
+				case 3: //viewOrder(order);
 						System.out.print("Input item ID to remove : ");
 						menuSelection  = sc.nextInt();
 						if(order.checkItemByID(menuSelection)){ //if item exists
 							order.removeMenuItem(menuSelection);
-							System.out.println(menu.getMenuItem(menuSelection).getName() +" removed");
+							System.out.println(menu.getMenuItemById(menuSelection).getName() +" removed");
 						}
 						else //if item doesnt exist
 							System.out.println("Error : Input valid item ID");
+						sc.nextLine();
+						System.out.println("\nPress enter to continue");
+						sc.nextLine();
 						break;
 						
-				case 4: this.viewOrder(order);
+				case 4: //this.viewOrder(order);
 						System.out.print("Input set ID to remove : ");
 						menuSelection  = sc.nextInt();
 						if(order.checkSetByID(menuSelection)){ //if set exists
@@ -340,16 +354,30 @@ public class OrderList {
 						}
 						else //if set doesnt exist
 							System.out.println("Error : Input valid set ID");
+						sc.nextLine();
+						System.out.println("\nPress enter to continue");
+						sc.nextLine();
 						break;
 		
-				case 5: System.out.println("Order update successful");
+				case 5: if(order.getSetSize() ==0 && order.getItemSize()==0){
+							System.out.println("\nError : Order is now empty. You have to add atleast 1 set or 1 item");
+							choice = 1;
+							sc.nextLine();
+							System.out.println("\nPress enter to continue");
+							sc.nextLine();
+				}
+				else{
+						System.out.println("Order update successful");
 						this.viewOrder(order);
 						order.setTotalPrice(calculateSum(order));
 						orders.remove(index); //remove old order
 						orders.add(order); //re-add updated order
 						orderOverWrite();
+				}
 						break;
 				default:System.out.println("Check input value");
+					System.out.println("\nPress enter to continue");
+					sc.nextLine();
 						break;
 			}
 		}while(choice!=5);
@@ -370,12 +398,11 @@ public class OrderList {
 			orders.remove(index);
 			orderOverWrite();
 			activeOrders--;
-			System.out.println("Order cancelled. Table " +order.getTableID() + " is now vacant");
+			System.out.println("\nOrder cancelled. Table " +order.getTableID() + " is now vacant");
 		}
 		
 	}
 
-	
 	public double calculateSum(Order order){
 		//calculate total sum of order
 		double price = 0;
@@ -389,29 +416,48 @@ public class OrderList {
 	public void viewOrder(Order order){
 		//display order details
 		System.out.println(order.getDate().toString());
-		System.out.println("Menu Items");
+		System.out.println("Order ID : " + order.getOrderID());
+		System.out.println("Table ID : " + order.getTableID());
+		System.out.println("Staff ID : " + order.getStaffID());
+		System.out.println("\nMenu Items");
+		System.out.format("%2s %-6s %30s    %9s","#", "ItemID", "Item Name", "Price");
 		for(int i=0;i<order.getItemSize();i++){
-			System.out.println(i+1 +". ");
-			menu.getMenuItemById(order.getItemIdByIndex(i)).printMenuItem();
+			System.out.format("%n%2d %6d %30s    %4s%5.2f",i+1,
+					menu.getMenuItemById(order.getItemIdByIndex(i)).getID(),
+					menu.getMenuItemById(order.getItemIdByIndex(i)).getName(),
+					"SGD ",
+					menu.getMenuItemById(order.getItemIdByIndex(i)).getPrice());
 		}
-		System.out.println("Menu Sets");
+		System.out.println("\n\nMenu Sets");
+		System.out.format("%2s %6s %30s    %9s","#", "SetID", "Set Name", "Price");
 		for(int j=0;j<order.getSetSize();j++){
-			System.out.println(j+1 +". ");
-			promoMenu.getSetByID(order.getSetIdByIndex(j)).printMenuSet();
+			System.out.format("%n%2d %6d %30s    %4s%5.2f",j+1,
+					promoMenu.getSetByID(order.getSetIdByIndex(j)).getID(),
+					promoMenu.getSetByID(order.getSetIdByIndex(j)).getName(),
+					"SGD ",
+					promoMenu.getSetByID(order.getSetIdByIndex(j)).getPrice());
 		}
 	}
 	
 	public void createInvoice(int orderID){
 		//create Invoice
 		int index = this.getIndexByID(orderID);
+		if(index==-1){
+			System.out.println("\nNo such order exists\n");
+			return;
+		}
 		Order order = orders.get(index);
+		if(!order.isActive()){
+			System.out.println("\nOrder is already complete\n");
+			return;
+		}
 		viewOrder(order);
 		double price = calculateSum(order);
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Are you a member ? (y/n");
+		System.out.print("\nAre you a member ? (y/n) : ");
 		String answer = sc.next();
 		int memberID;
-		if(answer=="y" || answer=="Y" || answer=="YES"||answer=="yes"){
+		if(answer.equals("y")|| answer.equals("Y") || answer.equals("YES")||answer.equals("yes")){
 			System.out.print("Input memberID : ");
 			memberID = sc.nextInt();
 			if(memberList.checkMember(memberID)){
@@ -429,9 +475,9 @@ public class OrderList {
 		System.out.println("GST : 7%");
 		System.out.println("Price after GST : " + price*1.07);
 		
+		tableList.vacateTable(order.getTableID());
 		order.closeOrder();
 		order.setTotalPrice(price);
-		tableList.vacateTable(order.getTableID());
 		orders.remove(index);
 		orders.add(order);
 		orderOverWrite();

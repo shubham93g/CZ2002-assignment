@@ -78,7 +78,7 @@ public class ReservationList {
 	
 	public int getIndexByName(String name){
 		for(int i=0;i<reservation.size();i++)
-			if(reservation.get(i).getName() == name)
+			if(reservation.get(i).getName().equalsIgnoreCase(name))
 				return i;
 		return -1;
 	}
@@ -92,7 +92,7 @@ public class ReservationList {
 		int year, month, date, hour, minute;
 		Calendar bookingTime = Calendar.getInstance();
 		System.out.print("Input the following details\nName : ");
-		name = sc.next();
+		name = sc.nextLine();
 		System.out.print("Phone Number : ");
 		phoneNumber = sc.nextInt();
 		do{
@@ -112,28 +112,30 @@ public class ReservationList {
 		System.out.print("Minute of reservation : ");
 		minute  = sc.nextInt();
 		bookingTime.set(year, month-1, date, hour, minute);
-		int tableID = tableList.getBestFitIndex(noOfPeople);
+		int tableID = tableList.getBestFit(noOfPeople);
 		Reservation tempReservation = new Reservation(name, phoneNumber, noOfPeople, tableID, bookingTime.getTime());
 		reservation.add(tempReservation);
-		tableList.occupyTable(tableID);
 		reservationListOverwrite();
 	}
 	
 	public void checkPrintReservation(String name){
 		int index = getIndexByName(name);
+		Date currentDate = new Date();
+		
 		if(index==-1)
 			System.out.println("No reservation by the name "+name+" was found");
 		else{
 			reservation.get(index).print();
-			Date currentDate = new Date();
 			Date endDate = reservation.get(index).getEndDate();
+			
 			if(currentDate.after(endDate)){
-				System.out.println("Reservation is now invalid.\nRemoving reservation and vacating table.");
+				System.out.println("Reservation is now invalid.\nRemoving reservation.");
 				removeReservation(name);
 			}
-			else{
-				System.out.print("Reservation is still active");
-			}
+			
+			
+			else
+					System.out.print("Reservation is still active");
 				
 		}
 		
@@ -141,10 +143,12 @@ public class ReservationList {
 	
 	public void removeReservation(String name){
 		int index = getIndexByName(name);
+		Date currentDate = new Date();
 		if(index==-1)
 			System.out.println("No reservation by the name "+name+" was found");
 		else{
-			tableList.vacateTable(reservation.get(index).getTableId());
+			if(currentDate.after(reservation.get(index).getDate()) && currentDate.before(reservation.get(index).getEndDate()))
+				tableList.vacateTable(reservation.get(index).getTableId());
 			reservation.remove(index);
 			System.out.println("Reservation removed");
 		}
@@ -162,7 +166,7 @@ public class ReservationList {
         	 	day = date.get(Calendar.DAY_OF_MONTH);
         	 	hour = date.get(Calendar.HOUR);
         	 	minute = date.get(Calendar.MINUTE);
-        	 	out.write(reservation.get(counter).getName()+"\n"+	String.valueOf(reservation.get(counter).getPhoneNumber())+"\n"+	String.valueOf(reservation.get(counter).getNoOfPeople())+"\n"+
+        	 	out.write(reservation.get(counter).getName()+"\n"+(reservation.get(counter).getPhoneNumber())+"\n"+	String.valueOf(reservation.get(counter).getNoOfPeople())+"\n"+
     		   	String.valueOf(reservation.get(counter).getTableId())+
         "\n"+String.valueOf(year)+"\n"+String.valueOf(month)+"\n"+String.valueOf(day)+"\n"+String.valueOf(hour)+"\n"+String.valueOf(minute));
         	out.newLine();

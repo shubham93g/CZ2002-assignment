@@ -1,10 +1,10 @@
-import java.util.ArrayList;
-import java.io.*;
-import java.util.*;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PromoMenu{
@@ -96,9 +96,11 @@ while (i<lines.size()){
 	 	 
 	public void printPromoMenu(){   
 		for (int i=0; i<promoMenu.size(); i++){
-	 	 System.out.println("Promotional menu set no."+(i+1));
-	 	 promoMenu.get(i).printMenuSet();
-	 	 System.out.println("\n");
+	 	 //System.out.println("Promotional menu set no."+(i+1));
+			System.out.format("%n%5s %20s   %9s", "SetID","Set Name","Set Price");
+			System.out.format("%n%5d %20s   %4s%5.2f", promoMenu.get(i).getID(), promoMenu.get(i).getName(), "SGD ", promoMenu.get(i).getPrice());
+			promoMenu.get(i).printMenuSet();
+			System.out.println("\n");
 		}
 	  }
 	
@@ -171,6 +173,7 @@ while (i<lines.size()){
 	public void removeSetByID(int setID){
 		int index = getSetIndexByID(setID);
 		if(index!=-1){
+			System.out.println( promoMenu.get(index).getName() + " removed");
 			promoMenu.remove(index);
 		savePromoMenu();}
 		else

@@ -23,20 +23,16 @@ public class TableList {
 		int empty = 0;
 		for(int i=0;i<10;i++)
 			if(!table[i].isOccupied()){
-				table[i].print();
+				//table[i].print();
 				empty++;
 			}
 		return empty;
 	}
 	
-	public int showOcupied(){
-		int occupied = 0;
+	public void show(){
+		System.out.format("%n%7s %8s %8s", "TableID","Capacity","Occupied");
 		for(int i=0;i<10;i++)
-			if(table[i].isOccupied()){
-				table[i].print();
-				occupied++;
-			}
-		return occupied;
+			System.out.format("%n%7d %8d %8s",table[i].getTableID(), table[i].getCapacity(), String.valueOf(table[i].isOccupied()));
 	}
 	
 	public Table getTable(int tableID){
@@ -55,20 +51,46 @@ public class TableList {
 		table[tableID].vacate();
 	}
 	
-	//returns index of table with best fit for the the noOfPeople booking
-	public int getBestFitIndex(int noOfPeople){
-		System.out.println("Funtion entered");
-		int tempTableID = -1;
-		if(showEmpty()==0) //if no tables are empty, return -1
-			return tempTableID;
-		int tempDifference = 10;
-		for(int i=0;i<10;i++){
-			if(table[i].getCapacity() >= noOfPeople && !table[i].isOccupied())
-				if((table[i].getCapacity()-noOfPeople)<=tempDifference){
-					tempDifference = table[i].getCapacity()-noOfPeople;
-					tempTableID = i;
-			}
+	//returns index of table with best fit empty table for the the noOfPeople booking
+	public int getBestFitEmptyIndex(int noOfPeople){
+		if(noOfPeople<=0 || noOfPeople>10){
+			System.out.print("Error. Check input");
+			return -1;
 		}
-		return tempTableID;
+		else{
+			int tempTableID = -1;
+			if(showEmpty()==0) //if no tables are empty, return -1
+				return tempTableID;
+			int tempDifference = 10;
+			for(int i=0;i<10;i++){
+				if(table[i].getCapacity() >= noOfPeople && !table[i].isOccupied())
+					if((table[i].getCapacity()-noOfPeople)<=tempDifference){
+						tempDifference = table[i].getCapacity()-noOfPeople;
+						tempTableID = i;
+				}
+			}
+			return tempTableID;
+		}
+	}
+	
+	public int getBestFit(int noOfPeople){
+		if(noOfPeople<=0 || noOfPeople>10){
+			System.out.print("Error. Check input");
+			return -1;
+		}
+		else{
+			int tempTableID = -1;
+			if(showEmpty()==0) //if no tables are empty, return -1
+				return tempTableID;
+			int tempDifference = 10;
+			for(int i=0;i<10;i++){
+				if(table[i].getCapacity() >= noOfPeople)
+					if((table[i].getCapacity()-noOfPeople)<=tempDifference){
+						tempDifference = table[i].getCapacity()-noOfPeople;
+						tempTableID = i;
+				}
+			}
+			return tempTableID;
+		}
 	}
 }

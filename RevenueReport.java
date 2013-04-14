@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
@@ -20,26 +19,26 @@ public class RevenueReport {
 public void setPeriod() {
 			int year_start,year_end,month_start,month_end,day_start,day_end, hour_start, hour_end;
 	    	Calendar start = Calendar.getInstance();
-	    	Calendar end =Calendar.getInstance();
+	    	Calendar end = Calendar.getInstance();
 	    	Scanner sc = new Scanner(System.in);
 	    	System.out.println("Input the following details");
-	    	System.out.print("Start year");
+	    	System.out.print("Start year: ");
 	    	year_start = sc.nextInt();
-	    	System.out.print("Start month");
+	    	System.out.print("Start month: ");
 	    	month_start = sc.nextInt();
 	    	month_start--;
-	    	System.out.print("Start day");
+	    	System.out.print("Start day: ");
 	    	day_start = sc.nextInt();
-	    	System.out.print("Start hour");
+	    	System.out.print("Start hour: ");
 	    	hour_start = sc.nextInt();
-	    	System.out.print("End year");
+	    	System.out.print("End year: ");
 	    	year_end = sc.nextInt();
-	    	System.out.print("End month");
+	    	System.out.print("End month: ");
 	    	month_end = sc.nextInt();
 	    	month_end--;
-	    	System.out.print("End day");
+	    	System.out.print("End day: ");
 	    	day_end = sc.nextInt();
-	    	System.out.print("End hour");
+	    	System.out.print("End hour: ");
 	    	hour_end = sc.nextInt();
             start.set(Calendar.YEAR, year_start);
             start.set(Calendar.MONTH, month_start);
@@ -86,6 +85,8 @@ public void setPeriod() {
 			price = 0.0;
 			memberPrice = 0.0;
 			totalPrice = 0.0;
+			System.out.println("Month : " + monthDigitToString(testDate.get(Calendar.MONTH)));
+			System.out.format("%n%-28s %7s %8s %9s", "Date","OrderID", "isMember", "Price SGD");
 			for(int i=0;i<orders.getSize();i++){
 				tempDate.setTime(orders.getOrderByIndex(i).getDate());
 				if(tempDate.get(Calendar.MONTH)==testDate.get(Calendar.MONTH)&&tempDate.get(Calendar.YEAR)==testDate.get(Calendar.YEAR) && !orders.getOrderByIndex(i).isActive()){
@@ -93,15 +94,24 @@ public void setPeriod() {
 					if(orders.getOrderByIndex(i).isMember()){
 						memberSize++;
 						memberPrice+= orders.getOrderByIndex(i).getTotalPrice()*0.9;
+						System.out.format("%n%28s %7d %8s %9.2f",
+								orders.getOrderByIndex(i).getDate().toString(),
+								orders.getOrderByIndex(i).getOrderID(), 
+								String.valueOf(orders.getOrderByIndex(i).isMember()),
+								orders.getOrderByIndex(i).getTotalPrice()*0.9);
 					}
 					else{ //if not member
 						price += orders.getOrderByIndex(i).getTotalPrice();
+						System.out.format("%n%28s %7d %8s %9.2f",
+								orders.getOrderByIndex(i).getDate().toString(),
+								orders.getOrderByIndex(i).getOrderID(), 
+								String.valueOf(orders.getOrderByIndex(i).isMember()),
+								orders.getOrderByIndex(i).getTotalPrice());
 					}
 				}//end of if
 			}
 			totalPrice = memberPrice + price;
-			System.out.println("Month : " + monthDigitToString(testDate.get(Calendar.MONTH)));
-			System.out.println("Total revenue : SGD "+ totalPrice);
+			System.out.println("\nTotal revenue : SGD "+ totalPrice);
 			System.out.println("Total no.of order : "+ orderSize);
 			System.out.println("No.of orders by members : "+ memberSize);
 			System.out.println("Revenue from non-members : SGD "+ price);
